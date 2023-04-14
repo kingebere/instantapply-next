@@ -16,7 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
 const params={
     Bucket: 'uiland',
-    Key:"tree.pdf",
+    Key:"upload.pdf",
     Body:req.body
 }
       s3.upload(params, function(err:any, data:any) {
