@@ -16,7 +16,8 @@ export default function Onboarding() {
 
       async function handleChange(event:any) {
        console.log(event.target.files[0]) 
-       const data= await fetch('/api/upload-pdf',{method:'POST',mode:'cors',body:JSON.stringify(event.target.files[0])})
+       console.log(JSON.stringify(event.target.files[0])) 
+       const data= await fetch('/api/upload-pdf',{method:'POST',mode:'cors',body:event.target.files[0]})
        const res= data.json()
        console.log('res')
        console.log(res)
