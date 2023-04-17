@@ -1,16 +1,7 @@
 import React, { useEffect } from "react"
 
 export default function Onboarding() {
-  //   useEffect(()=>{
-  // 		async function result(){
-  // 		const data= await fetch('/api/upload-pdf',{method:'POST',mode:'cors',body:event.target.files[0]})
-  // 		const res= data.json()
-  // 		console.log('res')
-  // 		console.log(res)
-  // 		}
-  // 		result()
 
-  // 	  },[])
 
   // CHECK THAT THE FILE IS PROPER FORMAT (size, type, etc)
 
