@@ -10,7 +10,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 export async function signInWithGoogle() {
 	let redirectUrl =
 		process.env.NODE_ENV === 'production'
-			? 'https://google.com'
+			? 'https://instantapply.co'
 			: 'http://localhost:3000/';
 
 	const { data, error } = await supabase.auth.signInWithOAuth({
