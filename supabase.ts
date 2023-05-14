@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { Session, createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ||"";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY||"";
@@ -10,8 +10,8 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 export async function signInWithGoogle() {
 	let redirectUrl =
 		process.env.NODE_ENV === 'production'
-			? 'https://instantapply.co'
-			: 'http://localhost:3000/';
+			? 'https://instantapply.co/onboarding/'
+			: 'http://localhost:3000/onboarding/';
 
 	const { data, error } = await supabase.auth.signInWithOAuth({
 		provider: 'google',
@@ -29,3 +29,18 @@ export async function getSession() {
 	} = await supabase.auth.getSession();
 	return session;
 }
+
+
+//send user profile details
+
+export async function insertToProfile (formData: any,user: any) {
+	if(user){
+		const{data,error}=	await supabase
+			.from('profile')
+			.update(formData)
+		.eq('email', user?.user?.email)
+			.select();
+	return data
+	}
+	
+	};
