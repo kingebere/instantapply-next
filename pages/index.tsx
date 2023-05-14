@@ -68,10 +68,8 @@ export default function Home() {
 					content='https://epcjufipobybxdmcqjgb.supabase.co/storage/v1/object/public/uiland-store/uiland-capture2.PNG'
 				/>
 				<meta name='next-head-count' content='23' />
-				<meta
-					name='google-site-verification'
-					content='ODqtX_v3ldmmo5AB7fzcCJtP6IXdY_RDDeCK29OG6qs'
-				/>
+			
+                <meta name="google-site-verification" content="blSfmOOE3TZH4oMIOHPHxYYV9qW83ZLuUUgH-vADBxY" />
 			</Head>
     
    
