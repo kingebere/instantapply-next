@@ -8,11 +8,10 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 
 //Google Oauth
 export async function signInWithGoogle() {
-	let redirectUrl ='https://instantapply.co/onboarding/'
-
-		// process.env.NODE_ENV === 'production'
-		// 	? 'https://instantapply.co/onboarding/'
-		// 	: 'http://localhost:3000/onboarding/';
+	let redirectUrl =
+		process.env.NODE_ENV === 'production'
+			? 'https://instantapply.co/onboarding/'
+			: 'http://localhost:3000/onboarding/';
 
 	const { data, error } = await supabase.auth.signInWithOAuth({
 		provider: 'google',
