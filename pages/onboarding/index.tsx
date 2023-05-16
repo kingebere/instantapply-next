@@ -1,6 +1,7 @@
 import { insertToProfile,getSession } from "@/supabase"
 import React, { useState,useEffect } from "react"
 import { Session } from '@supabase/auth-helpers-react';
+
 export default function Onboarding() {
 const [formData,setFormData]=useState({resume_email:"",firstname:"",lastname:"",resume_url:""})
 const[user,setUser]=useState<Session|null>()
