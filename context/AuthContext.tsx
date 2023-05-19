@@ -1,15 +1,26 @@
-import { User } from '@supabase/supabase-js'
+import { getSession } from "@/supabase";
+import { Session, UserAttributes } from "@supabase/supabase-js";
+import { ReactNode, createContext, useEffect, useState } from "react";
+import User from "@supabase/supabase-js";
+import { UserAttributeKeyList } from "aws-sdk/clients/inspector";
 
-import React from 'react'
-import { createContext } from 'vm'
+export const AuthContext = createContext<UserAttributes | null>(null);
 
+export default function AuthProvider({ children }: { children: ReactNode }) {
+	const [user, setUser] = useState<UserAttributes | null>(null);
 
-const AuthContext = 
+	//get user's details
+	useEffect(() => {
+		async function getUser() {
+			const session: Session | null = await getSession();
+			if (session) {
+				return setUser(session.user);
+			}
+			return setUser(null);
+		}
 
+		getUser();
+	}, []);
 
-export default function AuthProvider() {
-
-  return (
-    <div>AuthContext</div>
-  )
+	return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }

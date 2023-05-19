@@ -1,14 +1,17 @@
-import { insertToProfile, getSession } from "@/supabase";
-import React, { useState, useEffect } from "react";
-import { Session } from "@supabase/auth-helpers-react";
+import useAuth from "@/hooks/useAuth";
+import { insertToProfile } from "@/supabase";
+import { useState } from "react";
 
 export default function Onboarding() {
+	const user = useAuth();
 	const [formData, setFormData] = useState({
 		resume_email: "",
 		firstname: "",
 		lastname: "",
 		resume_url: "",
 	});
+
+
 
 	// CHECK THAT THE FILE IS PROPER FORMAT (size, type, etc)
 
@@ -36,15 +39,6 @@ export default function Onboarding() {
 		}));
 	}
 
-	//get user's details
-	useEffect(() => {
-		async function getUser() {
-			const session = await getSession();
-			setUser(session);
-		}
-		getUser();
-	}, []);
-
 	//add input values to the formdata state
 	function updateName(e: { target: { name: any; value: any } }) {
 		const fieldName = e.target.name;
@@ -61,7 +55,7 @@ export default function Onboarding() {
 		e.preventDefault();
 		const data = await insertToProfile(formData, user);
 	}
-
+	console.log(user);
 	return (
 		<>
 			<section className='bg-gray-50 dark:bg-gray-900'>
