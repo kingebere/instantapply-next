@@ -18,11 +18,12 @@ export default function Onboarding() {
 	async function handleChange(event: any) {
 		console.log(event.target.files[0]);
 		const fieldName = event.target.name;
-		console.log(JSON.stringify(event.target.files[0]));
 		const file = event.target.files[0];
 		const formData = new FormData();
-		formData.append("file", file);
-		const data = await fetch("/api/upload-pdf", {
+		formData.append('file', file);
+		const filename = encodeURIComponent(file.name)
+		const fileType = encodeURIComponent(file.type)
+		const data = await fetch(`/api/upload-pdf?file=${filename}&fileType=${fileType}`, {
 			method: "POST",
 			mode: "cors",
 			body: formData,

@@ -21,11 +21,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // const name = req.body.name
+  // const file = req.body.file
+
+ 
   const params = {
     Bucket: "instantapply",
-    Key: "upload.pdf",
+    Key: req.query.file as string,
     Body: req.body,
-    ContentType: "application/pdf",
+    ContentType: req.query.fileType as string,
   }
   s3.upload(params, function (err: any, data: any) {
     if (err) console.log(err, err.stack) // an error occurred

@@ -11,7 +11,7 @@ export async function signInWithGoogle() {
 	let redirectUrl =
 		process.env.NODE_ENV === 'production'
 			? 'https://instantapply.co/onboarding/'
-			: 'https://instantapply.co/onboarding/';
+			: 'http://localhost:3001/onboarding/';
 
 	const { data, error } = await supabase.auth.signInWithOAuth({
 		provider: 'google',
@@ -34,11 +34,12 @@ export async function getSession() {
 //send user profile details
 
 export async function insertToProfile (formData: any,user: any) {
+	
 	if(user){
 		const{data,error}=	await supabase
 			.from('profile')
 			.update(formData)
-		.eq('email', user?.user?.email)
+		.eq('email', user?.email)
 			.select();
 	return data
 	}
