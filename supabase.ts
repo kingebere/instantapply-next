@@ -11,7 +11,7 @@ export async function signInWithGoogle() {
 	let redirectUrl =
 		process.env.NODE_ENV === 'production'
 			? 'https://instantapply.co/onboarding/'
-			: 'http://localhost:3000/onboarding/';
+			: 'https://instantapply.co/onboarding/';
 
 	const { data, error } = await supabase.auth.signInWithOAuth({
 		provider: 'google',
