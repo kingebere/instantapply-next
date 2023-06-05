@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } else {
         // If the upload is successful, send a response with the URL of the uploaded file -- for signed url
         // If the upload is successful.send a response with the public url and the data key  -- for public url
-        return res.json({ url:`https://pub-1b721db15d0342048e62b290ea6ae12a.r2.dev/${data.Key}`  });
+        return res.json({ url:`https://pub-1b721db15d0342048e62b290ea6ae12a.r2.dev/${data.Key}`,filename:data.key  });
       }
     });
   } catch (error) {

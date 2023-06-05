@@ -8,7 +8,7 @@ export default function Onboarding() {
     resume_email: "",
     firstname: "",
     lastname: "",
-    resume_url: "",
+    resume_url: "",filename:""
   })
 
   async function handleChange(event: any) {
@@ -51,6 +51,14 @@ export default function Onboarding() {
     // Parse the response data as JSON
     const res = await data.json()
 
+	setFormData((prev) => ({
+		// Retain the existing values
+		...prev,
+		// update the current field
+		filename: res.filename,
+	  }))
+
+	
     setFormData((prev) => ({
       // Retain the existing values
       ...prev,
@@ -75,7 +83,7 @@ export default function Onboarding() {
     e.preventDefault()
     const data = await insertToProfile(formData, user)
   }
-
+  console.log(formData)
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
