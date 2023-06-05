@@ -5,6 +5,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+
+    res.setHeader("Access-Control-Allow-Origin", "https://boards.greenhouse.io");
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+
   // Handle preflight requests
   if (req.method === "OPTIONS") {
     res.setHeader("Access-Control-Allow-Origin", "https://boards.greenhouse.io");
