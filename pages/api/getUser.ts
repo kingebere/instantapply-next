@@ -1,10 +1,19 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 import { supabase } from "../../supabase";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // Set the allowed origin for CORS
+  res.setHeader("Access-Control-Allow-Origin", "https://boards.greenhouse.io"); 
+
+  // Handle preflight requests
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
+
   // Extract the token from the request headers
   const token =
     req.headers && req.headers.authorization
