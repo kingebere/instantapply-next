@@ -8,7 +8,8 @@ export default function Onboarding() {
     resume_email: "",
     firstname: "",
     lastname: "",
-    resume_url: "",filename:""
+    resume_url: "",
+    filename: "",
   })
 
   async function handleChange(event: any) {
@@ -51,14 +52,13 @@ export default function Onboarding() {
     // Parse the response data as JSON
     const res = await data.json()
 
-	setFormData((prev) => ({
-		// Retain the existing values
-		...prev,
-		// update the current field
-		filename: res.filename,
-	  }))
+    setFormData((prev) => ({
+      // Retain the existing values
+      ...prev,
+      // update the current field
+      filename: res.filename,
+    }))
 
-	
     setFormData((prev) => ({
       // Retain the existing values
       ...prev,
