@@ -66,7 +66,7 @@ export default async function handler(
 		if (err.message === "User not found") {
 			return res.status(401).json({ message: err.message });
 		} else {
-			return res.status(500).json({ message: err.message });
+			return res.status(500).json({ message: "Internal Server Error" });
 		}
 	}
 }
