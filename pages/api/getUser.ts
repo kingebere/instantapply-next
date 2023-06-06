@@ -49,7 +49,7 @@ export default async function handler(
 	try {
 		if (data) {
 			const { user } = data;
-			if (!user) throw new Error("User not found");
+			if (!user) throw new Error("User token Expired");
 			// Query the 'profile' table for data related to the user ID
 			const { data: dbdata, error } = await supabase
 				.from("profile")
@@ -60,10 +60,13 @@ export default async function handler(
 				return res.status(200).json({
 					data: dbdata[0],
 				});
-			}
+			} else throw new Error("User not found");
 		}
 	} catch (err: any) {
-		if (err.message === "User not found") {
+		if (
+			err.message === "User not found" ||
+			err.message === "User token Expired"
+		) {
 			return res.status(401).json({ message: err.message });
 		} else {
 			return res.status(500).json({ message: "Internal Server Error" });
