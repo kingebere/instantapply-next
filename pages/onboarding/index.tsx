@@ -10,11 +10,13 @@ export default function Onboarding() {
     lastname: "",
     resume_url: "",
     filename: "",
-	phone:"",
-	github:"",
-	linkedin:"",
-	gender:"",
-	youlatino:"",
+    phone: "",
+    github: "",
+    linkedin: "",
+    gender: "",
+    youlatino: "",
+    disabilitystatus: "",
+    veteranstatus: "",
   })
 
   async function handleChange(event: any) {
@@ -165,8 +167,7 @@ export default function Onboarding() {
                   />
                 </div>
 
-
-				<div>
+                <div>
                   <label
                     htmlFor="text"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -185,7 +186,7 @@ export default function Onboarding() {
                   />
                 </div>
 
-				<div>
+                <div>
                   <label
                     htmlFor="text"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -204,7 +205,7 @@ export default function Onboarding() {
                   />
                 </div>
 
-				<div>
+                <div>
                   <label
                     htmlFor="text"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -223,7 +224,7 @@ export default function Onboarding() {
                   />
                 </div>
 
-				<div>
+                <div>
                   <label
                     htmlFor="text"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -242,8 +243,45 @@ export default function Onboarding() {
                   />
                 </div>
 
+                <div>
+                  <label
+                    htmlFor="text"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Veteran Status
+                  </label>
+                  <input
+                    type="text"
+                    name="veteranstatus"
+                    id="veteranstatus"
+                    value={formData.veteranstatus}
+                    onChange={updateName}
+                    placeholder="Dave King"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                  />
+                </div>
 
-				<div>
+                <div>
+                  <label
+                    htmlFor="text"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Disability Status
+                  </label>
+                  <input
+                    type="text"
+                    name="disabilitystatus"
+                    id="disabilitystatus"
+                    value={formData.disabilitystatus}
+                    onChange={updateName}
+                    placeholder="Dave King"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                  />
+                </div>
+
+                <div>
                   <label
                     htmlFor="text"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -261,7 +299,6 @@ export default function Onboarding() {
                     required
                   />
                 </div>
-
 
                 <div>
                   <label
