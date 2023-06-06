@@ -91,13 +91,10 @@ export default function Onboarding() {
 	async function formSubmit(e: any) {
 		e.preventDefault();
 		const data = await insertToProfile(formData, user);
+		router.push("/dashboard");
 	}
 
-	useEffect(() => {
-		if (!user) router.push("/");
-	});
 
-	if (user) {
 		return (
 			<>
 				<section className='bg-gray-50 dark:bg-gray-900'>
@@ -234,6 +231,9 @@ export default function Onboarding() {
 											<option> Are you Latino?</option>
 											<option value='Yes'>Yes</option>
 											<option value='No'>No</option>
+											<option value='Decline To Self Identify'>
+												Decline To Self Identify
+											</option>
 										</select>
 									</div>
 
@@ -257,8 +257,11 @@ export default function Onboarding() {
 											required
 										>
 											<option> Gender</option>
-											<option value='Yes'>Male</option>
-											<option value='No'>Female</option>
+											<option value='Male'>Male</option>
+											<option value='Female'>Female</option>
+											<option value='Decline To Self Identify'>
+												Decline To Self Identify
+											</option>
 										</select>
 									</div>
 
@@ -282,8 +285,16 @@ export default function Onboarding() {
 											required
 										>
 											<option> Veteran Status?</option>
-											<option value='Yes'>Yes</option>
-											<option value='No'>No</option>
+											<option value='I am not a protected veteran'>
+												I am not a protected veteran
+											</option>
+											<option value='I identity as one or more of the classifications of a protected veteran'>
+												I identity as one or more of the classifications of a
+												protected veteran
+											</option>
+											<option value="I don't wish to answer">
+												I don't wish to answer
+											</option>
 										</select>
 									</div>
 
@@ -307,8 +318,17 @@ export default function Onboarding() {
 											required
 										>
 											<option> Disbality Status?</option>
-											<option value='Yes'>Yes</option>
-											<option value='No'>No</option>
+											<option value='Yes, I have a disability, or have a history/record of having a disablity '>
+												Yes, I have a disability, or have a history/record of
+												having a disablity{" "}
+											</option>
+											<option value="Mo, I don't have a disablity, or a history/record of having a disablity">
+												No, I don't have a disablity, or a history/record of
+												having a disablity{" "}
+											</option>
+											<option value="I don't wish to answer">
+												I don't wish to answer
+											</option>
 										</select>
 									</div>
 
@@ -385,5 +405,4 @@ export default function Onboarding() {
 				</section>
 			</>
 		);
-	} else return null;
 }
