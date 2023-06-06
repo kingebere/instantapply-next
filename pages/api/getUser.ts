@@ -6,6 +6,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const allowedOrigin = ["https://jobs.lever.co", "https://boards.greenhouse.io"]
+
+
+  //since Access-Control-Allow-Origin doesnt allow multiple value , we 
+  //make a checker that adds the allowed url based on the headers.origin
   if (allowedOrigin.includes(req.headers.origin as string)) {
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string)
   }
