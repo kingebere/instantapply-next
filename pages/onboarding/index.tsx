@@ -322,7 +322,7 @@ export default function Onboarding() {
 												Yes, I have a disability, or have a history/record of
 												having a disablity{" "}
 											</option>
-											<option value="Mo, I don't have a disablity, or a history/record of having a disablity">
+											<option value="No, I don't have a disablity, or a history/record of having a disablity">
 												No, I don't have a disablity, or a history/record of
 												having a disablity{" "}
 											</option>
