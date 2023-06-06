@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const allowedOrigin = ["jobs.lever.co", "https://boards.greenhouse.io"]
+  const allowedOrigin = ["https://jobs.lever.co", "https://boards.greenhouse.io"]
   if (allowedOrigin.includes(req.headers.origin as string)) {
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string)
   }
