@@ -400,7 +400,7 @@ export default function Onboarding() {
                       required
                     />
                   </div>
-                  <div className="ml-3 text-sm">
+                  {/* <div className="ml-3 text-sm">
                     <label
                       htmlFor="terms"
                       className="font-light text-gray-500 dark:text-gray-300"
@@ -413,7 +413,7 @@ export default function Onboarding() {
                         Terms and Conditions
                       </a>
                     </label>
-                  </div>
+                  </div> */}
                 </div>
                 <button
                   type="submit"
