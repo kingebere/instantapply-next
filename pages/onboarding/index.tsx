@@ -294,12 +294,12 @@ export default function Onboarding() {
                     Veteran Status?
                   </label>
                   <select
-                    name="veteran"
+                    name="veteranstatus"
                     id="veteran"
                     onChange={updateName}
-                    value={formData.veteranstatus}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
+                    value={formData.veteranstatus}
                   >
                     {formData.veteranstatus === "" && (
                       <option value="" disabled>
@@ -328,7 +328,7 @@ export default function Onboarding() {
                     Disability Status?
                   </label>
                   <select
-                    name="disability"
+                    name="disabilitystatus"
                     id="disability"
                     onChange={updateName}
                     value={formData.disabilitystatus}
@@ -340,10 +340,7 @@ export default function Onboarding() {
                         Disbality Status?
                       </option>
                     )}
-                    <option value="" disabled>
-                      {" "}
-                      Disbality Status?
-                    </option>
+
                     <option value="Yes, I have a disability, or have a history/record of having a disablity">
                       Yes, I have a disability, or have a history/record of
                       having a disablity{" "}
@@ -403,7 +400,7 @@ export default function Onboarding() {
                       required
                     />
                   </div>
-                  <div className="ml-3 text-sm">
+                  {/* <div className="ml-3 text-sm">
                     <label
                       htmlFor="terms"
                       className="font-light text-gray-500 dark:text-gray-300"
@@ -416,7 +413,7 @@ export default function Onboarding() {
                         Terms and Conditions
                       </a>
                     </label>
-                  </div>
+                  </div> */}
                 </div>
                 <button
                   type="submit"
