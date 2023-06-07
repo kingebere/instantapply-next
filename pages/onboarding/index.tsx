@@ -393,33 +393,33 @@ export default function Onboarding() {
 									/>
 								</div>
 
-								<div>
-									<label
-										htmlFor='file'
-										className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-									>
-										Input CV
-									</label>
-									<input
-										onChange={handleChange}
-										accept='image/*,.pdf'
-										className='block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
-										id='default_size'
-										name='resume_url'
-										type='file'
-									/>
-								</div>
-								<div className='flex items-start'>
-									<div className='flex items-center h-5'>
-										<input
-											id='terms'
-											aria-describedby='terms'
-											type='checkbox'
-											className='w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800'
-											required
-										/>
-									</div>
-									{/* <div className="ml-3 text-sm">
+                <div>
+                  <label
+                    htmlFor="file"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Input CV
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    accept="image/*,.pdf"
+                    className="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    id="default_size"
+                    name="resume_url"
+                    type="file"
+                  />
+                </div>
+                {/* <div className="flex items-start">
+                  <div className="flex items-center h-5">
+                    <input
+                      id="terms"
+                      aria-describedby="terms"
+                      type="checkbox"
+                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                      required
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
                     <label
                       htmlFor="terms"
                       className="font-light text-gray-500 dark:text-gray-300"
@@ -432,24 +432,24 @@ export default function Onboarding() {
                         Terms and Conditions
                       </a>
                     </label>
-                  </div> */}
-								</div>
-								<button
-									type='submit'
-									disabled={isButtonDisabled}
-									className={`w-full text-white   focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${
-										isButtonDisabled
-											? `bg-gray-300`
-											: `bg-primary-600 hover:bg-primary-700`
-									}`}
-								>
-									Create a profile
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</section>
-		</>
-	);
+                  </div>
+                </div> */}
+                <button
+                  type="submit"
+                  disabled={isButtonDisabled}
+                  className={`w-full text-white   focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${
+                    isButtonDisabled
+                      ? `bg-gray-300`
+                      : `bg-primary-600 hover:bg-primary-700`
+                  }`}
+                >
+                  Create a profile
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  )
 }
