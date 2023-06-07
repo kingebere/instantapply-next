@@ -390,7 +390,7 @@ export default function Onboarding() {
                     type="file"
                   />
                 </div>
-                <div className="flex items-start">
+                {/* <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
                       id="terms"
@@ -400,7 +400,7 @@ export default function Onboarding() {
                       required
                     />
                   </div>
-                  {/* <div className="ml-3 text-sm">
+                  <div className="ml-3 text-sm">
                     <label
                       htmlFor="terms"
                       className="font-light text-gray-500 dark:text-gray-300"
@@ -413,8 +413,8 @@ export default function Onboarding() {
                         Terms and Conditions
                       </a>
                     </label>
-                  </div> */}
-                </div>
+                  </div>
+                </div> */}
                 <button
                   type="submit"
                   disabled={isButtonDisabled}
