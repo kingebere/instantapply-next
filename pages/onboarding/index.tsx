@@ -286,6 +286,7 @@ export default function Onboarding() {
 										>
 											<option> Veteran Status?</option>
 											<option value='I am not a protected veteran'>
+
 												I am not a protected veteran
 											</option>
 											<option value='I identity as one or more of the classifications of a protected veteran'>
@@ -293,7 +294,7 @@ export default function Onboarding() {
 												protected veteran
 											</option>
 											<option value="I don't wish to answer">
-												I don't wish to answer
+												I don&lsquo;t wish to answer
 											</option>
 										</select>
 									</div>
@@ -323,11 +324,11 @@ export default function Onboarding() {
 												having a disablity{" "}
 											</option>
 											<option value="Mo, I don't have a disablity, or a history/record of having a disablity">
-												No, I don't have a disablity, or a history/record of
+												No, I don&lsquo;t have a disablity, or a history/record of
 												having a disablity{" "}
 											</option>
 											<option value="I don't wish to answer">
-												I don't wish to answer
+												I don&lsquo;t wish to answer
 											</option>
 										</select>
 									</div>
