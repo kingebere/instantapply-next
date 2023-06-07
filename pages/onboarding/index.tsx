@@ -20,7 +20,28 @@ export default function Onboarding() {
 		disabilitystatus: "",
 		veteranstatus: "",
 	});
+	const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+	const  areAllValuesFilled =(obj: Record<string, any>)=> {
+		// Iterate over each key in the object
+		for (const key in obj) {
+		  // Check if the key belongs to the object (not inherited from prototype)
+		  if (obj.hasOwnProperty(key)) {
+			// Check if the value is undefined, null, or an empty string , added extra checkers because anything can happen :)
+			if (obj[key] === undefined || obj[key] === null || obj[key] === '') {
+			  // If any value is empty, return true
+			  return true;
+			}
+		  }
+		}
+		// If all values are filled, return false
+		return false;
+	  }
+	  
+	  useEffect(()=>{
+		setIsButtonDisabled(areAllValuesFilled(formData))
 
+	  },[formData])
+	
 	async function handleChange(event: any) {
 		// Extract the name of the input field and the selected file
 		const fieldName = event.target.name;
@@ -87,6 +108,8 @@ export default function Onboarding() {
 		}));
 	}
 
+
+
 	//submit formdata
 	async function formSubmit(e: any) {
 		e.preventDefault();
@@ -94,6 +117,7 @@ export default function Onboarding() {
 		router.push("/dashboard");
 	}
 
+	console.log(formData,"p")
 
 		return (
 			<>
@@ -210,60 +234,45 @@ export default function Onboarding() {
 									</div>
 
 									<div>
-										<label
-											htmlFor='countries'
-											className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-										>
-											Are you Latino?
-										</label>
-										<select
-											name='youlatino'
-											id='youlatino'
-											onChange={(e) =>
-												setFormData((prev) => ({
-													...prev,
-													youlatino: e.target.value,
-												}))
-											}
-											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-											required
-										>
-											<option value="" disabled> Are you Latino?</option>
-											<option value='Yes'>Yes</option>
-											<option value='No'>No</option>
-											<option value='Decline To Self Identify'>
-												Decline To Self Identify
-											</option>
-										</select>
-									</div>
-
-									<div>
-										<label
-											htmlFor='countries'
-											className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
-										>
-											Gender
-										</label>
-										<select
-											name='Gender'
-											id='Gender'
-											onChange={(e) =>
-												setFormData((prev) => ({
-													...prev,
-													gender: e.target.value,
-												}))
-											}
-											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-											required
-										>
-											<option value="" disabled> Gender</option>
-											<option value='Male'>Male</option>
-											<option value='Female'>Female</option>
-											<option value='Decline To Self Identify'>
-												Decline To Self Identify
-											</option>
-										</select>
-									</div>
+      <label htmlFor="youlatino" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Are you Latino?
+      </label>
+      <select
+        name="youlatino"
+        id="youlatino"
+        onChange={updateName}
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        required
+        value={formData.youlatino}
+      >
+        <option value="" disabled>
+          Are you Latino?
+        </option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="Decline To Self Identify">Decline To Self Identify</option>
+      </select>
+    </div>
+	<div>
+      <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Gender
+      </label>
+      <select
+        name="gender"
+        id="gender"
+        onChange={updateName}
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        required
+        value={formData.gender}
+      >
+        <option value="" disabled>
+          Gender
+        </option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Decline To Self Identify">Decline To Self Identify</option>
+      </select>
+    </div>
 
 									<div>
 										<label
@@ -275,12 +284,9 @@ export default function Onboarding() {
 										<select
 											name='veteran'
 											id='veteran'
-											onChange={(e) =>
-												setFormData((prev) => ({
-													...prev,
-													veteranstatus: e.target.value,
-												}))
+											onChange={updateName
 											}
+											value={formData.veteranstatus}
 											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 											required
 										>
@@ -309,12 +315,9 @@ export default function Onboarding() {
 										<select
 											name='disability'
 											id='disability'
-											onChange={(e) =>
-												setFormData((prev) => ({
-													...prev,
-													disabilitystatus: e.target.value,
-												}))
+											onChange={updateName
 											}
+											value={formData.disabilitystatus}
 											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 											required
 										>
@@ -395,7 +398,8 @@ export default function Onboarding() {
 									</div>
 									<button
 										type='submit'
-										className='w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
+										disabled={isButtonDisabled}
+										className={`w-full text-white   focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${isButtonDisabled?`bg-gray-300`:`bg-primary-600 hover:bg-primary-700`}`}
 									>
 										Create a profile
 									</button>
