@@ -228,7 +228,7 @@ export default function Onboarding() {
 											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 											required
 										>
-											<option value="" disabled> Are you Latino?</option>
+											<option value=" " disabled> Are you Latino?</option>
 											<option value='Yes'>Yes</option>
 											<option value='No'>No</option>
 											<option value='Decline To Self Identify'>
@@ -256,7 +256,7 @@ export default function Onboarding() {
 											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 											required
 										>
-											<option value="" disabled> Gender</option>
+											<option value=" " disabled> Gender</option>
 											<option value='Male'>Male</option>
 											<option value='Female'>Female</option>
 											<option value='Decline To Self Identify'>
@@ -284,7 +284,7 @@ export default function Onboarding() {
 											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 											required
 										>
-											<option value="" disabled> Veteran Status?</option>
+											<option value=" " disabled> Veteran Status?</option>
 											<option value='I am not a protected veteran'>
 
 												I am not a protected veteran
@@ -318,7 +318,7 @@ export default function Onboarding() {
 											className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 											required
 										>
-											<option value="" disabled> Disbality Status?</option>
+											<option value=" " disabled> Disbality Status?</option>
 											<option value='Yes, I have a disability, or have a history/record of having a disablity'>
 												Yes, I have a disability, or have a history/record of
 												having a disablity{" "}
