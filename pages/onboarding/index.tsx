@@ -117,16 +117,16 @@ export default function Onboarding() {
 
   return (
     <>
-      <section className="bg-gray-50 dark:bg-gray-900">
+      <section className="bg-white dark:bg-white mt-4">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
           <a
             href="#"
-            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+            className="flex items-center mb-6 text-2xl font-semibold text-instant-600 font-silka dark:text-white"
           >
             <img
-              className="w-8 h-8 mr-2"
-              src="/assets/images/Instantapply-logo.png"
-              alt="logo"
+              src="/assets/images/instantapply-logo.svg"
+              className="mr-1 h-6 sm:h-9"
+              alt="InstantApply Logo"
             />
             InstantApply
           </a>
