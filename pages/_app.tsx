@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useState } from "react";
-
+import Layout from "../components/layout";
 import "../styles/globals.css";
 import Script from "next/script";
 import { useRouter } from "next/router";
@@ -63,7 +63,9 @@ export default function App({
 					`}
         </Script>
 
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
 
         <Analytics />
       </AuthProvider>
