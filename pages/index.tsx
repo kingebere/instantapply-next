@@ -83,17 +83,12 @@ export default function Home() {
               </span>
             </a>
             <div className="flex items-center lg:order-2">
-              <a
-                href="#"
-                className="font-normal text-lg lg:text-instant-600 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300  rounded-lg  px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-              >
-                Log in
-              </a>
+           
               <a
                 href="#"
                 className="text-white bg-instant-600 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-normal text-sm  rounded-lg  px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-instant-600 focus:outline-none dark:focus:ring-primary-800"
               >
-                Get started
+                Login
               </a>
               <button
                 data-collapse-toggle="mobile-menu-2"
