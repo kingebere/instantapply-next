@@ -1,12 +1,12 @@
-import React from "react"
-import fs from "fs"
+import React from "react";
+import fs from "fs";
 
-import { GetServerSideProps } from "next"
-const Sitemap = () => {}
+import { GetServerSideProps } from "next";
+const Sitemap = () => {};
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const baseUrl = "https://instantapply.co"
+  const baseUrl = "https://instantapply.co";
 
-  const mainPage = ["https://instantapply.co"]
+  const mainPage = ["https://instantapply.co"];
   const staticPages = fs
     .readdirSync(
       // 'pages'
@@ -50,11 +50,11 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
         "admin.tsx",
         "index.tsx",
         "sitemap.xml.ts",
-      ].includes(staticPage)
+      ].includes(staticPage);
     })
     .map((staticPagePath) => {
-      return `${baseUrl}/${staticPagePath}`
-    })
+      return `${baseUrl}/${staticPagePath}`;
+    });
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	  <changefreq>weekly</changefreq>
 	  <priority>1.0</priority>
 	</url>
-  `
+  `;
     })
     .join("")}
       ${staticPages
@@ -79,20 +79,20 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
               <changefreq>weekly</changefreq>
               <priority>1.0</priority>
             </url>
-          `
+          `;
         })
         .join("")}
   
     </urlset>
-  `
+  `;
 
-  res.setHeader("Content-Type", "text/xml")
-  res.write(sitemap)
-  res.end()
+  res.setHeader("Content-Type", "text/xml");
+  res.write(sitemap);
+  res.end();
 
   return {
     props: {},
-  }
-}
+  };
+};
 
-export default Sitemap
+export default Sitemap;

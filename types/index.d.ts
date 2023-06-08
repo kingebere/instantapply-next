@@ -2,8 +2,8 @@
 export {};
 
 declare global {
-	interface Window {
-		gtag: any;
-		opera: any;
-	}
+  interface Window {
+    gtag: any;
+    opera: any;
+  }
 }
