@@ -308,39 +308,7 @@ export default function Onboarding() {
                   </div>
                 ))}
                 {/* This maps the select tag */}
-                <div>
-                  <label
-                    htmlFor="countries"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Veteran Status?
-                  </label>
-                  <select
-                    name="veteranstatus"
-                    id="veteran"
-                    onChange={updateName}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                    value={formData.veteranstatus}
-                  >
-                    {formData.veteranstatus === "" && (
-                      <option value="" disabled>
-                        Veteran Status?
-                      </option>
-                    )}
-
-                    <option value="I am not a protected veteran">
-                      I am not a protected veteran
-                    </option>
-                    <option value="I identity as one or more of the classifications of a protected veteran">
-                      I identity as one or more of the classifications of a
-                      protected veteran
-                    </option>
-                    <option value="I don't wish to answer">
-                      I don&lsquo;t wish to answer
-                    </option>
-                  </select>
-                </div>
+              
                 {selectFields.map((field, index) => (
                   <div key={index}>
                     <label
