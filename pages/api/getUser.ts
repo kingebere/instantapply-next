@@ -34,42 +34,30 @@ export default async function handler(
     res.status(200).end();
     return;
   }
-
-  // Extract the token from the request headers
-  const token =
-    req.headers && req.headers.authorization
-      ? req.headers.authorization.split(" ")[1]
-      : undefined;
-
-  if (!token) return res.status(401).json({ message: "Invalid Auth token" });
-
-  // Retrieve user data using the token
-  const { data, error } = await supabase.auth.getUser(token);
+  const { session } = req.body;
+  const {
+    data: {
+      session: { user },
+    },
+  } = JSON.parse(session);
 
   try {
-    if (data) {
-      const { user } = data;
-      if (!user) throw new Error("User token Expired");
-      // Query the 'profile' table for data related to the user ID
-      const { data: dbdata, error } = await supabase
-        .from("profile")
-        .select("*")
-        .eq("id", user?.id);
-      if (dbdata) {
-        // Return the retrieved data if it exists
-        return res.status(200).json({
-          data: dbdata[0],
-        });
-      } else throw new Error("User not found");
-    }
+    // Query the 'profile' table for data related to the user ID
+    const { data: dbdata, error } = await supabase
+      .from("profile")
+      .select("*")
+      .eq("id", user?.id);
+    if (dbdata) {
+      // Return the retrieved data if it exists
+      return res.status(200).json({
+        data: dbdata[0],
+      });
+    } else throw new Error("User not found");
+    
   } catch (err: any) {
-    if (
-      err.message === "User not found" ||
-      err.message === "User token Expired"
-    ) {
-      return res.status(401).json({ message: err.message });
-    } else {
-      return res.status(500).json({ message: "Internal Server Error" });
-    }
+
+    res.status(500).json({ message: "Internal Server Error" });
+    
+  
   }
 }
