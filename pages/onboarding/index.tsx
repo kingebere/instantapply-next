@@ -38,6 +38,156 @@ export default function Onboarding() {
     return false;
   };
 
+  const inputFields = [
+    {
+      label: "Your email",
+      type: "email",
+      name: "resume_email",
+      id: "email",
+      value: formData.resume_email,
+      onChange: updateName,
+      placeholder: "name@company.com",
+      required: true,
+    },
+    {
+      label: "First Name",
+      type: "text",
+      name: "firstname",
+      id: "firstname",
+      value: formData.firstname,
+      onChange: updateName,
+      placeholder: "Dave King",
+      required: true,
+    },
+    {
+      label: "Last Name",
+      type: "text",
+      name: "lastname",
+      id: "lastname",
+      value: formData.lastname,
+      onChange: updateName,
+      placeholder: "Dave King",
+      required: true,
+    },
+    {
+      label: "Github Url",
+      type: "text",
+      name: "github",
+      id: "github",
+      value: formData.github,
+      onChange: updateName,
+      placeholder: "https://github.com/username",
+      required: true,
+    },
+    {
+      label: "Phone Number",
+      type: "number",
+      name: "phone",
+      id: "phone",
+      value: formData.phone,
+      onChange: updateName,
+      placeholder: "+254909887455",
+      required: true,
+    },
+    {
+      label: "Linkedin Url",
+      type: "text",
+      name: "linkedin",
+      id: "linkedin",
+      value: formData.linkedin,
+      onChange: updateName,
+      placeholder: "https://linkedin/in/username",
+      required: true,
+    },
+    {
+      label: "Current Company",
+      type: "text",
+      name: "currentCompany",
+      id: "currentCompany",
+      value: formData.currentCompany,
+      onChange: updateName,
+      placeholder: "Alphabet",
+      required: true,
+    },
+  ];
+
+  const selectFields = [
+    {
+      label: "Are you Latino?",
+      name: "youlatino",
+      id: "youlatino",
+      onChange: updateName,
+      value: formData.youlatino,
+      options: [
+        { value: "", label: "Are you Latino?", disabled: true },
+        { value: "Yes", label: "Yes" },
+        { value: "No", label: "No" },
+        {
+          value: "Decline To Self Identify",
+          label: "Decline To Self Identify",
+        },
+      ],
+    },
+    {
+      label: "Gender",
+      name: "gender",
+      id: "gender",
+      onChange: updateName,
+      value: formData.gender,
+      options: [
+        { value: "", label: "Gender", disabled: true },
+        { value: "Male", label: "Male" },
+        { value: "Female", label: "Female" },
+        {
+          value: "Decline To Self Identify",
+          label: "Decline To Self Identify",
+        },
+      ],
+    },
+
+    {
+      label: "Disability Status?",
+      name: "disabilitystatus",
+      id: "disabilitystatus",
+      onChange: updateName,
+      value: formData.disabilitystatus,
+      options: [
+        { value: "", label: "Disability Status?", disabled: true },
+        { value: "Yes", label: "Yes" },
+        { value: "No", label: "No" },
+        {
+          value: "Decline To Self Identify",
+          label: "Decline To Self Identify",
+        },
+      ],
+    },
+
+    {
+      label: "Veteran Status?",
+      name: "veteranstatus",
+      id: "veteranstatus",
+      onChange: updateName,
+      value: formData.veteranstatus,
+      options: [
+        { value: "", label: "Veteran Status?", disabled: true },
+        {
+          value: "I am not a protected veteran",
+          label: "I am not a protected veteran",
+        },
+        {
+          value:
+            "I identity as one or more of the classifications of a protected veteran",
+          label:
+            "I identity as one or more of the classifications of a protected veteran",
+        },
+        {
+          value: "I don&lsquo;t wish to answer",
+          label: "I don&lsquo;t wish to answer",
+        },
+      ],
+    },
+  ];
+
   useEffect(() => {
     setIsButtonDisabled(areAllValuesFilled(formData));
   }, [formData]);
@@ -136,173 +286,28 @@ export default function Onboarding() {
                 Add Profile
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={formSubmit}>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="resume_email"
-                    id="email"
-                    value={formData.resume_email}
-                    onChange={updateName}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="name@company.com"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="text"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    name="firstname"
-                    id="firstname"
-                    value={formData.firstname}
-                    onChange={updateName}
-                    placeholder="Dave King"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="text"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    name="lastname"
-                    id="lastname"
-                    value={formData.lastname}
-                    onChange={updateName}
-                    placeholder="Dave King"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="text"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Github Url
-                  </label>
-                  <input
-                    type="text"
-                    name="github"
-                    id="github"
-                    value={formData.github}
-                    onChange={updateName}
-                    placeholder="https://github.com/username"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="text"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Linkedin Url
-                  </label>
-                  <input
-                    type="text"
-                    name="linkedin"
-                    id="linkedin"
-                    value={formData.linkedin}
-                    onChange={updateName}
-                    placeholder="https://www.linkedin.com/in/username"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Current Company
-                  </label>
-                  <input
-                    type="text"
-                    name="currentCompany"
-                    id="currentCompany"
-                    value={formData.currentCompany}
-                    onChange={updateName}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Alphabet"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="youlatino"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Are you Latino?
-                  </label>
-                  <select
-                    name="youlatino"
-                    id="youlatino"
-                    onChange={updateName}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                    value={formData.youlatino}
-                  >
-                    {formData.youlatino === "" && (
-                      <option value="" disabled>
-                        Are you Latino?
-                      </option>
-                    )}
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Decline To Self Identify">
-                      Decline To Self Identify
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <label
-                    htmlFor="gender"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Gender
-                  </label>
-                  <select
-                    name="gender"
-                    id="gender"
-                    onChange={updateName}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                    value={formData.gender}
-                  >
-                    {formData.gender === "" && (
-                      <option value="" disabled>
-                        Gender
-                      </option>
-                    )}
-
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Decline To Self Identify">
-                      Decline To Self Identify
-                    </option>
-                  </select>
-                </div>
-
+                {/* This maps the input tag */}
+                {inputFields.map((field, index) => (
+                  <div key={index}>
+                    <label
+                      htmlFor={field.id}
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {field.label}
+                    </label>
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      id={field.id}
+                      value={field.value}
+                      onChange={field.onChange}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder={field.placeholder}
+                      required={field.required}
+                    />
+                  </div>
+                ))}
+                {/* This maps the select tag */}
                 <div>
                   <label
                     htmlFor="countries"
@@ -336,61 +341,47 @@ export default function Onboarding() {
                     </option>
                   </select>
                 </div>
+                {selectFields.map((field, index) => (
+                  <div key={index}>
+                    <label
+                      htmlFor={field.id}
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      {field.label}
+                    </label>
+                    <select
+                      name={field.name}
+                      id={field.id}
+                      onChange={field.onChange}
+                      value={field.value}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                      {/* This is to prevent this option from being clickable */}
 
-                <div>
-                  <label
-                    htmlFor="countries"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Disability Status?
-                  </label>
-                  <select
-                    name="disabilitystatus"
-                    id="disability"
-                    onChange={updateName}
-                    value={formData.disabilitystatus}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  >
-                    {formData.disabilitystatus === "" && (
-                      <option value="" disabled>
-                        Disbality Status?
-                      </option>
-                    )}
+                      {field.options[0].value === "" && (
+                        <option value="" disabled>
+                          {field.options[0].label}
+                        </option>
+                      )}
 
-                    <option value="Yes, I have a disability, or have a history/record of having a disablity">
-                      Yes, I have a disability, or have a history/record of
-                      having a disablity{" "}
-                    </option>
-                    <option value="No, I don't have a disablity, or a history/record of having a disablity">
-                      No, I don&lsquo;t have a disablity, or a history/record of
-                      having a disablity{" "}
-                    </option>
-                    <option value="I don't wish to answer">
-                      I don&lsquo;t wish to answer
-                    </option>
-                  </select>
-                </div>
+                      {/* This filters out the option with the empty value and displays the remaining options */}
 
-                <div>
-                  <label
-                    htmlFor="text"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Phone number
-                  </label>
-                  <input
-                    type="number"
-                    name="phone"
-                    id="phone"
-                    value={formData.phone}
-                    onChange={updateName}
-                    placeholder="000 0000 000"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
-
+                      {field.options
+                        .filter((values) => values.value !== "")
+                        .map((option, index) => (
+                          <option
+                            key={index}
+                            value={option.value}
+                            disabled={option.disabled}
+                          >
+                            {option.label}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                ))}
+                {/* Since we want the resume to be the last thing a user fills , we
+                dont add it to the array */}
                 <div>
                   <label
                     htmlFor="file"
