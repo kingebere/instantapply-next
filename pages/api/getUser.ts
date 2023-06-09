@@ -53,11 +53,7 @@ export default async function handler(
         data: dbdata[0],
       });
     } else throw new Error("User not found");
-    
   } catch (err: any) {
-
     res.status(500).json({ message: "Internal Server Error" });
-    
-  
   }
 }

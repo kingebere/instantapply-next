@@ -1,14 +1,39 @@
+import { FormEvent, useEffect, useState } from "react";
+import {
+  GetServerSidePropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from "next";
+
+// Hooks
 import useAuth from "@/hooks/useAuth";
+
 import { insertToProfile } from "@/supabase";
+
+//Packages
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+
+interface FormDataInterface {
+  resume_email: string;
+  firstname: string;
+  lastname: string;
+  resume_url: string;
+  filename: string;
+  phone: string;
+  github: string;
+  linkedin: string;
+  gender: string;
+  youlatino: string;
+  disabilitystatus: string;
+  veteranstatus: string;
+  currentCompany: string;
+}
 
 export default function Onboarding() {
   const user = useAuth();
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormDataInterface>({
     resume_email: "",
     firstname: "",
     lastname: "",
@@ -23,7 +48,7 @@ export default function Onboarding() {
     veteranstatus: "",
     currentCompany: "",
   });
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [active, setActive] = useState<number>(1);
   const areAllValuesFilled = (obj: Record<string, any>) => {
     // Iterate over each key in the object
@@ -209,7 +234,7 @@ export default function Onboarding() {
   const firstStepNumber = 1;
   const finalStepNumber = 3;
   //function for the previous state
-  function prevPage() {
+  function prevPage(firstStepNumber: number) {
     setActive((prev) => {
       let prevPage = prev - firstStepNumber;
       if (prevPage < firstStepNumber || prevPage === firstStepNumber) {
@@ -220,7 +245,7 @@ export default function Onboarding() {
   }
   //function for the next state
 
-  function nextPage() {
+  function nextPage(finalStepNumber: number) {
     setActive((next) => {
       let nextPage = next + 1;
       if (nextPage > finalStepNumber || nextPage === finalStepNumber) {
@@ -229,11 +254,14 @@ export default function Onboarding() {
       return nextPage;
     });
   }
-  async function handleChange(event: any) {
+  async function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     // Extract the name of the input field and the selected file
     const fieldName = event.target.name;
-    const file = event.target.files[0];
+    const file = event.target.files?.[0];
 
+    if (!file) {
+      return; // No file selected, exit the function
+    }
     // Encode the file name and type using encodeURIComponent to ensure safe URL parameter values
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
@@ -285,21 +313,26 @@ export default function Onboarding() {
   }
 
   //add input values to the formdata state
-  function updateName(e: { target: { name: any; value: any } }) {
-    const fieldName = e.target.name;
+  function updateName(
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
+    const fieldName = event.target.name;
     setFormData((prev) => ({
       // Retain the existing values
       ...prev,
       // update the current field
-      [fieldName]: e.target.value,
+      [fieldName]: event.target.value,
     }));
   }
 
   //submit formdata
-  async function formSubmit(e: any) {
+  async function formSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = await insertToProfile(formData, user);
-    router.push("/dashboard");
+    if(data && data.length !== 0 ){
+      router.push("/dashboard");
+    }
+    
   }
 
   return (
@@ -420,13 +453,18 @@ export default function Onboarding() {
                 )}
 
                 {active !== firstStepNumber ? (
-                  <button onClick={prevPage}>Back</button>
+                  <button onClick={() => prevPage(firstStepNumber)}>
+                    Back
+                  </button>
                 ) : (
                   <div></div>
                 )}
                 {active !== finalStepNumber && (
                   <>
-                    <button className="active" onClick={nextPage}>
+                    <button
+                      className="active"
+                      onClick={() => nextPage(finalStepNumber)}
+                    >
                       Next
                     </button>
                   </>
@@ -481,21 +519,21 @@ export default function Onboarding() {
   );
 }
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext | { req: NextApiRequest; res: NextApiResponse; }) => {
-	// Create authenticated Supabase Client
-	const supabase = createServerSupabaseClient(ctx);
-	// Check if we have a session
-	const {
-		data: { session },
-	} = await supabase.auth.getSession();
+export const getServerSideProps = async (
+  ctx: GetServerSidePropsContext | { req: NextApiRequest; res: NextApiResponse }
+) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-	if (!session)
-		return {
-			redirect: {
-				destination: '/',
-				permanent: false,
-			},
-		};
-
-
+  if (!session)
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
 };
