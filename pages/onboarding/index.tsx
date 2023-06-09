@@ -68,6 +68,10 @@ export default function Onboarding() {
     return false;
   };
 
+  useEffect(() => {
+    setIsButtonDisabled(areAllValuesFilled(formData));
+  }, [formData]);
+
   const inputFields = [
     {
       label: "Your email",
@@ -229,10 +233,6 @@ export default function Onboarding() {
     },
   ];
 
-  useEffect(() => {
-    setIsButtonDisabled(areAllValuesFilled(formData));
-  }, [formData]);
-
   const firstStepNumber = 1;
   const finalStepNumber = 3;
   //function for the previous state
@@ -256,6 +256,16 @@ export default function Onboarding() {
       return nextPage;
     });
   }
+
+  /**
+   *
+   * @param event
+   * @returns
+   */
+
+  //This function passes the pdf blob to the backend , which returns the url string
+  // from Cloudfare R2 .
+  // It also shows a loading state . This function showed me shege :)
   async function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setUploadPdfProgress(2);
     // Extract the name of the input field and the selected file

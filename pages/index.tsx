@@ -224,6 +224,26 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="bg-gradient-halfcream mb-6">
+        <div
+          style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
+          className="py-8 px-4 mx-auto max-w-screen-lg lg:px-12 sm:text-center lg:py-16"
+        >
+          <iframe
+            src="https://www.loom.com/embed/1d654172f0a3493da5a1bfb5e3cf498a"
+            title="instant-loom-video"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: "0",
+              left: "0",
+              width: "100%",
+              height: "100%",
+            }}
+          ></iframe>
+        </div>
+      </section>
     </>
   );
 }

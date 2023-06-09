@@ -12,6 +12,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "gradient-halfcream":
+          "linear-gradient(to bottom, #fffbf5 30% , white 30%)",
+      },
       colors: {
         primary: {
           "50": "#eff6ff",
