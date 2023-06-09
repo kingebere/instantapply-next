@@ -258,59 +258,64 @@ export default function Onboarding() {
     // Extract the name of the input field and the selected file
     const fieldName = event.target.name;
     const file = event.target.files?.[0];
-
+  
     if (!file) {
       return; // No file selected, exit the function
     }
+  
     // Encode the file name and type using encodeURIComponent to ensure safe URL parameter values
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
-
+  
     // Function to convert Blob to base64
     function toBase64(file: Blob) {
       const reader = new FileReader();
-      return new Promise((resolve, reject) => {
+      return new Promise<string>((resolve, reject) => {
         reader.readAsDataURL(file);
         reader.onload = function () {
-          resolve(reader.result); // Resolve with the base64 data
+          resolve(reader.result as string); // Resolve with the base64 data
         };
         reader.onerror = reject;
       });
     }
-
-    // Convert the file to base64
-    const pdfBlob = await toBase64(file);
-
-    // Send a POST request to the server to upload the PDF file
-    const data = await fetch(
-      `/api/upload-pdf?file=${filename}&fileType=${fileType}`,
-      {
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ pdfBlob }), // Send the base64-encoded PDF data in the request body
-        headers: {
-          "Content-Type": "application/json",
-        },
+  
+    try {
+      // Convert the file to base64
+      const pdfBlob = await toBase64(file);
+  
+      // Send a POST request to the server to upload the PDF file
+      const response = await fetch(
+        `/api/upload-pdf?file=${filename}&fileType=${fileType}`,
+        {
+          method: "POST",
+          mode: "cors",
+          body: JSON.stringify({ pdfBlob }), // Send the base64-encoded PDF data in the request body
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error("Error uploading PDF file"); // Throw an error for non-OK responses
       }
-    );
-
-    // Parse the response data as JSON
-    const res = await data.json();
-
-    setFormData((prev) => ({
-      // Retain the existing values
-      ...prev,
-      // update the current field
-      filename: res.filename,
-    }));
-
-    setFormData((prev) => ({
-      // Retain the existing values
-      ...prev,
-      // update the current field
-      [fieldName]: res.url,
-    }));
+  
+      // Parse the response data as JSON
+      const res = await response.json();
+  
+      setFormData((prev) => ({
+        // Retain the existing values
+        ...prev,
+        // Update the current field
+        filename: res.filename,
+        [fieldName]: res.url,
+      }));
+    } catch (error) {
+      // Handle the error from the backend
+      console.error(error);
+    }
   }
+  
 
   //add input values to the formdata state
   function updateName(
