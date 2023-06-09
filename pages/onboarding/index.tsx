@@ -1,5 +1,7 @@
 import useAuth from "@/hooks/useAuth";
 import { insertToProfile } from "@/supabase";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -479,3 +481,21 @@ export default function Onboarding() {
   );
 }
 
+export const getServerSideProps = async (ctx: GetServerSidePropsContext | { req: NextApiRequest; res: NextApiResponse; }) => {
+	// Create authenticated Supabase Client
+	const supabase = createServerSupabaseClient(ctx);
+	// Check if we have a session
+	const {
+		data: { session },
+	} = await supabase.auth.getSession();
+
+	if (!session)
+		return {
+			redirect: {
+				destination: '/',
+				permanent: false,
+			},
+		};
+
+
+};
