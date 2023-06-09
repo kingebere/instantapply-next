@@ -27,6 +27,7 @@ module.exports = {
         },
         "instant-600": "#190041",
         "instant-light-100": "#fffbf5",
+        "instant-light-200": "#5d00f1",
       },
       fontFamily: {
         silka: ["Silka", "cursive"],
