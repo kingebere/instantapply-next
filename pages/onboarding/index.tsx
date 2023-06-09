@@ -50,8 +50,8 @@ export default function Onboarding() {
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [active, setActive] = useState<number>(1);
-  const [uploadProgress,setUploadProgress]=useState<number>(1)
-  const [uploadPdfProgress,setUploadPdfProgress]=useState<number>(1)
+  const [uploadProgress, setUploadProgress] = useState<number>(1);
+  const [uploadPdfProgress, setUploadPdfProgress] = useState<number>(1);
   const areAllValuesFilled = (obj: Record<string, any>) => {
     // Iterate over each key in the object
     for (const key in obj) {
@@ -257,20 +257,19 @@ export default function Onboarding() {
     });
   }
   async function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-
-    setUploadPdfProgress(2)
+    setUploadPdfProgress(2);
     // Extract the name of the input field and the selected file
     const fieldName = event.target.name;
     const file = event.target.files?.[0];
-  
+
     if (!file) {
       return; // No file selected, exit the function
     }
-  
+
     // Encode the file name and type using encodeURIComponent to ensure safe URL parameter values
     const filename = encodeURIComponent(file.name);
     const fileType = encodeURIComponent(file.type);
-  
+
     // Function to convert Blob to base64
     function toBase64(file: Blob) {
       const reader = new FileReader();
@@ -282,11 +281,11 @@ export default function Onboarding() {
         reader.onerror = reject;
       });
     }
-  
+
     try {
       // Convert the file to base64
       const pdfBlob = await toBase64(file);
-  
+
       // Send a POST request to the server to upload the PDF file
       const response = await fetch(
         `/api/upload-pdf?file=${filename}&fileType=${fileType}`,
@@ -299,14 +298,14 @@ export default function Onboarding() {
           },
         }
       );
-  
+
       if (!response.ok) {
         throw new Error("Error uploading PDF file"); // Throw an error for non-OK responses
       }
-  
+
       // Parse the response data as JSON
       const res = await response.json();
-  
+
       setFormData((prev) => ({
         // Retain the existing values
         ...prev,
@@ -320,7 +319,6 @@ export default function Onboarding() {
       console.error(error);
     }
   }
-  
 
   //add input values to the formdata state
   function updateName(
@@ -338,58 +336,84 @@ export default function Onboarding() {
   //submit formdata
   async function formSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setUploadProgress(2)
+    setUploadProgress(2);
     const data = await insertToProfile(formData, user);
-    if(data && data.length !== 0 ){
-      setUploadProgress(3)
+    if (data && data.length !== 0) {
+      setUploadProgress(3);
       router.push("/dashboard");
     }
-    
   }
 
   return (
     <>
       <section className="bg-white dark:bg-white mt-4">
-        
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
-          <div className="sm:max-w-md w-full flex justify-center items-center mt-6 mb-4"> 
-          <ol className="flex items-center w-full">
-    { active===1?   <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block  text-blue-600 dark:text-blue-500 ">
-     <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-light-200 border-instant-light-200  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
-       1
-        </span>     </li>: <li className="flex w-full items-center  text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-light-200 after:border-4 after:inline-block dark:after:border-instant-light-200">
-    <span className="flex items-center justify-center w-10 h-10 bg-instant-light-200 rounded-full lg:h-12 lg:w-12 dark:bg-instant-light-200 shrink-0">
-            <svg aria-hidden="true" className="w-5 h-5 text-white lg:w-6 lg:h-6 dark:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-        </span></li>}
+          <div className="sm:max-w-md w-full flex justify-center items-center mt-6 mb-4">
+            <ol className="flex items-center w-full">
+              {active === 1 ? (
+                <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block  text-blue-600 dark:text-blue-500 ">
+                  <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-light-200 border-instant-light-200  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                    1
+                  </span>{" "}
+                </li>
+              ) : (
+                <li className="flex w-full items-center  text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-light-200 after:border-4 after:inline-block dark:after:border-instant-light-200">
+                  <span className="flex items-center justify-center w-10 h-10 bg-instant-light-200 rounded-full lg:h-12 lg:w-12 dark:bg-instant-light-200 shrink-0">
+                    <svg
+                      aria-hidden="true"
+                      className="w-5 h-5 text-white lg:w-6 lg:h-6 dark:text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </span>
+                </li>
+              )}
 
-        { active===3?  <li className="flex w-full items-center  text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-light-200 after:border-4 after:inline-block dark:after:border-instant-light-200">
-    <span className="flex items-center justify-center w-10 h-10 bg-instant-light-200 rounded-full lg:h-12 lg:w-12 dark:bg-instant-light-200 shrink-0">
-            <svg aria-hidden="true" className="w-5 h-5 text-white lg:w-6 lg:h-6 dark:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-        </span></li>: <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block text-blue-600 dark:text-blue-500 ">
-     <span className="flex items-center justify-center  w-10 h-10 bg-white border font-semibold text-instant-light-200 border-instant-light-200  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
-       2
-        </span>     </li>}  
-    <li className="flex items-center">
-   <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-light-200 border-instant-light-200  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
-       3
-        </span>
-    </li>
-</ol></div>
-       
-         
+              {active === 3 ? (
+                <li className="flex w-full items-center  text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-light-200 after:border-4 after:inline-block dark:after:border-instant-light-200">
+                  <span className="flex items-center justify-center w-10 h-10 bg-instant-light-200 rounded-full lg:h-12 lg:w-12 dark:bg-instant-light-200 shrink-0">
+                    <svg
+                      aria-hidden="true"
+                      className="w-5 h-5 text-white lg:w-6 lg:h-6 dark:text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </span>
+                </li>
+              ) : (
+                <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block text-blue-600 dark:text-blue-500 ">
+                  <span className="flex items-center justify-center  w-10 h-10 bg-white border font-semibold text-instant-light-200 border-instant-light-200  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                    2
+                  </span>{" "}
+                </li>
+              )}
+              <li className="flex items-center">
+                <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-light-200 border-instant-light-200  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                  3
+                </span>
+              </li>
+            </ol>
+          </div>
+
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight font-silka text-instant-600 text-gray-900 md:text-2xl dark:text-white">
                 Add Profile
               </h1>
-
-
-
-
-
-    
-
-
 
               <form className="space-y-4 md:space-y-6" onSubmit={formSubmit}>
                 {/* This maps the input tag */}
@@ -478,35 +502,52 @@ export default function Onboarding() {
                         name="resume_url"
                         type="file"
                       />
-                      <div className="font-silka text-instant-600">{uploadPdfProgress===1?'':uploadPdfProgress===2?'uploading..':'upload successful'}</div>
+                      <div className="font-silka text-instant-600">
+                        {uploadPdfProgress === 1
+                          ? ""
+                          : uploadPdfProgress === 2
+                          ? "uploading.."
+                          : "upload successful"}
+                      </div>
                     </div>
                   </>
                 )}
 
-             
-          
-                  <>
+                <>
                   <div className="flex justify-between items-center">
-                  {active !== firstStepNumber ? (        <button onClick={() => prevPage(firstStepNumber)}
-                            className="mb-6 inline-flex items-center px-4 py-2 mr-3 text-sm font-medium font-silka ring-2 ring-instant-600 text-instant-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                            <svg aria-hidden="true" className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            Back
-                        </button>) : (
-                  <div></div>
-                )}
-                      {active !== finalStepNumber && (    <button
-                       className="mb-6 inline-flex items-center px-4 py-2 mr-3 text-sm font-silka font-medium ring-2 ring-instant-600 text-white bg-instant-600 border border-instant-600 rounded-lg hover:bg-instant-600 hover:text-white dark:bg-instant-600 dark:border-instant-600 dark:text-instant-600 dark:hover:bg-instant-600 dark:hover:text-white"
-                      onClick={() => nextPage(finalStepNumber)}
-                    >
-                      Next
-                    </button>)}</div>
-                  </>
-               
+                    {active !== firstStepNumber ? (
+                      <button
+                        onClick={() => prevPage(firstStepNumber)}
+                        className="mb-6 inline-flex items-center px-4 py-2 mr-3 text-sm font-medium font-silka ring-2 ring-instant-600 text-instant-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="w-5 h-5 mr-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                        Back
+                      </button>
+                    ) : (
+                      <div></div>
+                    )}
+                    {active !== finalStepNumber && (
+                      <button
+                        className="mb-6 inline-flex items-center px-4 py-2 mr-3 text-sm font-silka font-medium ring-2 ring-instant-600 text-white bg-instant-600 border border-instant-600 rounded-lg hover:bg-instant-600 hover:text-white dark:bg-instant-600 dark:border-instant-600 dark:text-instant-600 dark:hover:bg-instant-600 dark:hover:text-white"
+                        onClick={() => nextPage(finalStepNumber)}
+                      >
+                        Next
+                      </button>
+                    )}
+                  </div>
+                </>
 
                 {/* <div className="flex items-start">
                   <div className="flex items-center h-5">
@@ -544,7 +585,11 @@ export default function Onboarding() {
                           : `bg-primary-600 hover:bg-primary-700`
                       }`}
                     >
-                   {uploadProgress===1?"Create a profile":uploadProgress===2?"Uploading...":"Uploaded"}   
+                      {uploadProgress === 1
+                        ? "Create a profile"
+                        : uploadProgress === 2
+                        ? "Uploading..."
+                        : "Uploaded"}
                     </button>
                   </>
                 )}
@@ -557,32 +602,23 @@ export default function Onboarding() {
   );
 }
 
-// export const getServerSideProps = async (
-//   ctx: GetServerSidePropsContext
-// ) => {
-//   // Create authenticated Supabase Client
-//   const supabase = createServerSupabaseClient(ctx);
-//   // Check if we have a session
-//   const {
-//     data: { session },
-//   } = await supabase.auth.getSession();
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-//   if (!session)
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
+  if (!session)
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
 
-
-
-
-	
-
-//     return {
-//       props: { session },
-//     }
-// 	;
-
-// };
+  return {
+    props: { session },
+  };
+};
