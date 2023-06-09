@@ -524,7 +524,7 @@ export default function Onboarding() {
   );
 }
 
-export const getServerSideProps =  (
+export const getServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
   // Create authenticated Supabase Client
@@ -541,4 +541,15 @@ export const getServerSideProps =  (
         permanent: false,
       },
     };
+
+
+
+
+	
+
+    return {
+      props: { session },
+    }
+	;
+
 };
