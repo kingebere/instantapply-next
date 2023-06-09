@@ -22,6 +22,7 @@ export default function Onboarding() {
     currentCompany: "",
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [active, setActive] = useState<number>(1);
   const areAllValuesFilled = (obj: Record<string, any>) => {
     // Iterate over each key in the object
     for (const key in obj) {
@@ -48,6 +49,7 @@ export default function Onboarding() {
       onChange: updateName,
       placeholder: "name@company.com",
       required: true,
+      step: 1,
     },
     {
       label: "First Name",
@@ -58,6 +60,7 @@ export default function Onboarding() {
       onChange: updateName,
       placeholder: "Dave King",
       required: true,
+      step: 1,
     },
     {
       label: "Last Name",
@@ -68,6 +71,7 @@ export default function Onboarding() {
       onChange: updateName,
       placeholder: "Dave King",
       required: true,
+      step: 1,
     },
     {
       label: "Github Url",
@@ -78,6 +82,7 @@ export default function Onboarding() {
       onChange: updateName,
       placeholder: "https://github.com/username",
       required: true,
+      step: 3,
     },
     {
       label: "Phone Number",
@@ -88,6 +93,7 @@ export default function Onboarding() {
       onChange: updateName,
       placeholder: "+254909887455",
       required: true,
+      step: 2,
     },
     {
       label: "Linkedin Url",
@@ -98,6 +104,7 @@ export default function Onboarding() {
       onChange: updateName,
       placeholder: "https://linkedin/in/username",
       required: true,
+      step: 2,
     },
     {
       label: "Current Company",
@@ -108,6 +115,7 @@ export default function Onboarding() {
       onChange: updateName,
       placeholder: "Alphabet",
       required: true,
+      step: 2,
     },
   ];
 
@@ -127,6 +135,7 @@ export default function Onboarding() {
           label: "Decline To Self Identify",
         },
       ],
+      step: 1,
     },
     {
       label: "Gender",
@@ -143,6 +152,7 @@ export default function Onboarding() {
           label: "Decline To Self Identify",
         },
       ],
+      step: 2,
     },
 
     {
@@ -160,6 +170,7 @@ export default function Onboarding() {
           label: "Decline To Self Identify",
         },
       ],
+      step: 3,
     },
 
     {
@@ -185,6 +196,7 @@ export default function Onboarding() {
           label: "I don&lsquo;t wish to answer",
         },
       ],
+      step: 3,
     },
   ];
 
@@ -192,6 +204,29 @@ export default function Onboarding() {
     setIsButtonDisabled(areAllValuesFilled(formData));
   }, [formData]);
 
+  const firstStepNumber = 1;
+  const finalStepNumber = 3;
+  //function for the previous state
+  function prevPage() {
+    setActive((prev) => {
+      let prevPage = prev - firstStepNumber;
+      if (prevPage < firstStepNumber || prevPage === firstStepNumber) {
+        prevPage = firstStepNumber;
+      }
+      return prevPage;
+    });
+  }
+  //function for the next state
+
+  function nextPage() {
+    setActive((next) => {
+      let nextPage = next + 1;
+      if (nextPage > finalStepNumber || nextPage === finalStepNumber) {
+        nextPage = finalStepNumber;
+      }
+      return nextPage;
+    });
+  }
   async function handleChange(event: any) {
     // Extract the name of the input field and the selected file
     const fieldName = event.target.name;
@@ -285,87 +320,116 @@ export default function Onboarding() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Add Profile
               </h1>
+
+              {/* Next page indicator */}
+              <div className={`dot ${active === 1 && "active"}`}></div>
+              <div className={`dot ${active === 2 && "active"}`}></div>
+              <div className={`dot ${active === 3 && "active"}`}></div>
+
               <form className="space-y-4 md:space-y-6" onSubmit={formSubmit}>
                 {/* This maps the input tag */}
-                {inputFields.map((field, index) => (
-                  <div key={index}>
-                    <label
-                      htmlFor={field.id}
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      {field.label}
-                    </label>
-                    <input
-                      type={field.type}
-                      name={field.name}
-                      id={field.id}
-                      value={field.value}
-                      onChange={field.onChange}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder={field.placeholder}
-                      required={field.required}
-                    />
-                  </div>
-                ))}
+                {inputFields
+                  .filter((items) => items.step === active)
+                  .map((field, index) => (
+                    <div key={index}>
+                      <label
+                        htmlFor={field.id}
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        {field.label}
+                      </label>
+                      <input
+                        type={field.type}
+                        name={field.name}
+                        id={field.id}
+                        value={field.value}
+                        onChange={field.onChange}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder={field.placeholder}
+                        required={field.required}
+                      />
+                    </div>
+                  ))}
                 {/* This maps the select tag */}
-              
-                {selectFields.map((field, index) => (
-                  <div key={index}>
-                    <label
-                      htmlFor={field.id}
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      {field.label}
-                    </label>
-                    <select
-                      name={field.name}
-                      id={field.id}
-                      onChange={field.onChange}
-                      value={field.value}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    >
-                      {/* This is to prevent this option from being clickable */}
 
-                      {field.options[0].value === "" && (
-                        <option value="" disabled>
-                          {field.options[0].label}
-                        </option>
-                      )}
+                {selectFields
+                  .filter((items) => items.step === active)
+                  .map((field, index) => (
+                    <div key={index}>
+                      <label
+                        htmlFor={field.id}
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        {field.label}
+                      </label>
+                      <select
+                        name={field.name}
+                        id={field.id}
+                        onChange={field.onChange}
+                        value={field.value}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      >
+                        {/* This is to prevent this option from being clickable */}
 
-                      {/* This filters out the option with the empty value and displays the remaining options */}
-
-                      {field.options
-                        .filter((values) => values.value !== "")
-                        .map((option, index) => (
-                          <option
-                            key={index}
-                            value={option.value}
-                            disabled={option.disabled}
-                          >
-                            {option.label}
+                        {field.options[0].value === "" && (
+                          <option value="" disabled>
+                            {field.options[0].label}
                           </option>
-                        ))}
-                    </select>
-                  </div>
-                ))}
+                        )}
+
+                        {/* This filters out the option with the empty value and displays the remaining options */}
+
+                        {field.options
+                          .filter((values) => values.value !== "")
+                          .map((option, index) => (
+                            <option
+                              key={index}
+                              value={option.value}
+                              disabled={option.disabled}
+                            >
+                              {option.label}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
+                  ))}
+
                 {/* Since we want the resume to be the last thing a user fills , we
                 dont add it to the array */}
-                <div>
-                  <label
-                    htmlFor="file"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Input CV
-                  </label>
-                  <input
-                    onChange={handleChange}
-                    accept="image/*,.pdf"
-                    className="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                    id="default_size"
-                    name="resume_url"
-                    type="file"
-                  />
-                </div>
+                {active === finalStepNumber && (
+                  <>
+                    <div>
+                      <label
+                        htmlFor="file"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Input CV
+                      </label>
+                      <input
+                        onChange={handleChange}
+                        accept="image/*,.pdf"
+                        className="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        id="default_size"
+                        name="resume_url"
+                        type="file"
+                      />
+                    </div>
+                  </>
+                )}
+
+                {active !== firstStepNumber ? (
+                  <button onClick={prevPage}>Back</button>
+                ) : (
+                  <div></div>
+                )}
+                {active !== finalStepNumber && (
+                  <>
+                    <button className="active" onClick={nextPage}>
+                      Next
+                    </button>
+                  </>
+                )}
+
                 {/* <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
@@ -391,17 +455,21 @@ export default function Onboarding() {
                     </label>
                   </div>
                 </div> */}
-                <button
-                  type="submit"
-                  disabled={isButtonDisabled}
-                  className={`w-full text-white   focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${
-                    isButtonDisabled
-                      ? `bg-gray-300`
-                      : `bg-primary-600 hover:bg-primary-700`
-                  }`}
-                >
-                  Create a profile
-                </button>
+                {active === finalStepNumber && (
+                  <>
+                    <button
+                      type="submit"
+                      disabled={isButtonDisabled}
+                      className={`w-full text-white   focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${
+                        isButtonDisabled
+                          ? `bg-gray-300`
+                          : `bg-primary-600 hover:bg-primary-700`
+                      }`}
+                    >
+                      Create a profile
+                    </button>
+                  </>
+                )}
               </form>
             </div>
           </div>
@@ -410,3 +478,4 @@ export default function Onboarding() {
     </>
   );
 }
+
