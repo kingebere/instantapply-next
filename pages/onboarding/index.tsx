@@ -52,6 +52,7 @@ export default function Onboarding() {
   const [active, setActive] = useState<number>(1);
   const [uploadProgress, setUploadProgress] = useState<number>(1);
   const [uploadPdfProgress, setUploadPdfProgress] = useState<number>(0);
+  const [pdfPreviewUrl, setPdfPreviewUrl] = useState<string>("");
   const areAllValuesFilled = (obj: Record<string, any>) => {
     // Iterate over each key in the object
     for (const key in obj) {
@@ -323,6 +324,8 @@ export default function Onboarding() {
         filename: res.filename,
         [fieldName]: res.url,
       }));
+     
+      setPdfPreviewUrl(URL.createObjectURL(file)); // Generate preview URL
       setUploadPdfProgress(3);
     } catch (error) {
       // Handle the error from the backend
@@ -570,6 +573,16 @@ export default function Onboarding() {
                         )}
                       </div>
                     </div>
+                    {pdfPreviewUrl && (
+          <div>
+            <iframe
+              src={pdfPreviewUrl}
+              width="100%"
+              height="500"
+              title="PDF Preview"
+            ></iframe>
+          </div>
+        )}
                   </>
                 )}
 
@@ -696,23 +709,23 @@ export default function Onboarding() {
   );
 }
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
-  // Check if we have a session
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+// export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+//   // Create authenticated Supabase Client
+//   const supabase = createServerSupabaseClient(ctx);
+//   // Check if we have a session
+//   const {
+//     data: { session },
+//   } = await supabase.auth.getSession();
 
-  if (!session)
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
+//   if (!session)
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
 
-  return {
-    props: { session },
-  };
-};
+//   return {
+//     props: { session },
+//   };
+// };
