@@ -76,10 +76,16 @@ export default function Home() {
             <svg className="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
         </a> */}
           <h1 className="mb-4 text-4xl font-extrabold font-silka tracking-tight leading-tight text-instant-600 md:text-5xl lg:text-8xl px-5 dark:text-white">
-            Autofill your Job Applications in one click
+            Autofill your Job{" "}
+            <h1 className="text-instant-text">Applications in one click</h1>
           </h1>
-          <p className="mb-8 text-lg  text-instant-600 font-silka font-medium lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+          {/* <p className="mb-8 text-lg  text-instant-textgrey font-silka font-medium lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
             Apply to job applications faster with instant autofill{" "}
+          </p> */}
+          <p className="mb-8 text-lg  text-instant-textgrey font-silka font-medium  sm:px-16 xl:px-60 dark:text-gray-400">
+            Submit job applications—10x faster. InstantApply&lsquo;s autofills
+            your work history on job boards faster as lightening with just a
+            single click{" "}
           </p>
           <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <div
@@ -242,6 +248,39 @@ export default function Home() {
               height: "100%",
             }}
           ></iframe>
+        </div>
+      </section>
+
+      <section className="bg-white dark:bg-gray-900 mb-10 ">
+        <div className="gap-8 items-center overflow-hidden py-8 h-screen bg-gradient-bitwhite relative px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:pt-2 sm:pb-8 lg:px-6">
+          <div className={styles.rod1}></div>
+          <div className={styles.rod2}></div>
+          <div className={styles.rod3}></div>
+          <div className="w-full  relative h-96"></div>
+          <div className="mt-4 md:mt-0">
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+              Get Hired Faster when you apply faster
+            </h2>
+            {/* <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Flowbite helps you connect with friends and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups.</p> */}
+            <a
+              href="#"
+              className="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900"
+            >
+              Download Chrome Extension
+              <svg
+                className="ml-2 -mr-1 w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
     </>

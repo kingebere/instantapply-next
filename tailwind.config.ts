@@ -14,7 +14,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         "gradient-halfcream":
-          "linear-gradient(to bottom, #fffbf5 30% , white 30%)",
+          "linear-gradient(to bottom, #f7f7f8 30% , white 30%)",
+        "gradient-bitwhite": "linear-gradient(to top, #f7f7f8 78% , white 30%)",
       },
       colors: {
         primary: {
@@ -29,9 +30,12 @@ module.exports = {
           "800": "#1e40af",
           "900": "#1e3a8a",
         },
-        "instant-600": "#190041",
-        "instant-light-100": "#fffbf5",
-        "instant-light-200": "#5d00f1",
+        "instant-600": "#006aff",
+        "instant-light-100": "#f7f7f8",
+        "instant-light-200": "#f7f7f8",
+        "instant-text": "#223140",
+        "instant-textgrey": "#737678",
+        "instant-textdark": "#00214f",
       },
       fontFamily: {
         silka: ["Silka", "cursive"],

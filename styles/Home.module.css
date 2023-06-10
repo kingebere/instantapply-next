@@ -276,3 +276,35 @@
     transform: rotate(0deg);
   }
 }
+
+.rod1 {
+  position: absolute;
+  height: 100%;
+  width: 90px;
+  left: 55px;
+  border-radius: 50px;
+  transform: rotateZ(41deg);
+  background-color: red;
+}
+
+.rod2 {
+  position: absolute;
+  height: 120%;
+  width: 90px;
+  left: 200px;
+  /* bottom: -5px; */
+  border-radius: 50px;
+  transform: translateY(30px) rotateZ(41deg);
+  background-color: green;
+}
+
+.rod3 {
+  position: absolute;
+  height: 131%;
+  width: 90px;
+  left: 0px;
+  border-radius: 50px;
+  transform: rotateZ(41deg);
+  transform-origin: bottom;
+  background-color: blue;
+}

@@ -51,7 +51,7 @@ export default function Onboarding() {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [active, setActive] = useState<number>(1);
   const [uploadProgress, setUploadProgress] = useState<number>(1);
-  const [uploadPdfProgress, setUploadPdfProgress] = useState<number>(1);
+  const [uploadPdfProgress, setUploadPdfProgress] = useState<number>(0);
   const areAllValuesFilled = (obj: Record<string, any>) => {
     // Iterate over each key in the object
     for (const key in obj) {
@@ -362,13 +362,13 @@ export default function Onboarding() {
             <ol className="flex items-center w-full">
               {active === 1 ? (
                 <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block  text-blue-600 dark:text-blue-500 ">
-                  <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-light-200 border-instant-light-200  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                  <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-600 border-instant-600  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
                     1
                   </span>{" "}
                 </li>
               ) : (
-                <li className="flex w-full items-center  text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-light-200 after:border-4 after:inline-block dark:after:border-instant-light-200">
-                  <span className="flex items-center justify-center w-10 h-10 bg-instant-light-200 rounded-full lg:h-12 lg:w-12 dark:bg-instant-light-200 shrink-0">
+                <li className="flex w-full items-center  text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-600 after:border-4 after:inline-block dark:after:border-instant-600">
+                  <span className="flex items-center justify-center w-10 h-10 bg-instant-600 rounded-full lg:h-12 lg:w-12 dark:bg-instant-600 shrink-0">
                     <svg
                       aria-hidden="true"
                       className="w-5 h-5 text-white lg:w-6 lg:h-6 dark:text-white"
@@ -379,7 +379,7 @@ export default function Onboarding() {
                       <path
                         fill-rule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       ></path>
                     </svg>
                   </span>
@@ -387,8 +387,8 @@ export default function Onboarding() {
               )}
 
               {active === 3 ? (
-                <li className="flex w-full items-center  text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-light-200 after:border-4 after:inline-block dark:after:border-instant-light-200">
-                  <span className="flex items-center justify-center w-10 h-10 bg-instant-light-200 rounded-full lg:h-12 lg:w-12 dark:bg-instant-light-200 shrink-0">
+                <li className="flex w-full items-center  text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-600 after:border-4 after:inline-block dark:after:border-instant-600">
+                  <span className="flex items-center justify-center w-10 h-10 bg-instant-600 rounded-full lg:h-12 lg:w-12 dark:bg-instant-600 shrink-0">
                     <svg
                       aria-hidden="true"
                       className="w-5 h-5 text-white lg:w-6 lg:h-6 dark:text-white"
@@ -399,20 +399,20 @@ export default function Onboarding() {
                       <path
                         fill-rule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       ></path>
                     </svg>
                   </span>
                 </li>
               ) : (
                 <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block text-blue-600 dark:text-blue-500 ">
-                  <span className="flex items-center justify-center  w-10 h-10 bg-white border font-semibold text-instant-light-200 border-instant-light-200  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                  <span className="flex items-center justify-center  w-10 h-10 bg-white border font-semibold text-instant-600 border-instant-600  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
                     2
                   </span>{" "}
                 </li>
               )}
               <li className="flex items-center">
-                <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-light-200 border-instant-light-200  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-600 border-instant-600  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
                   3
                 </span>
               </li>
@@ -421,7 +421,7 @@ export default function Onboarding() {
 
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight font-silka text-instant-600 text-gray-900 md:text-2xl dark:text-white">
+              <h1 className="text-xl font-bold leading-tight tracking-tight font-silka text-instant-textdark text-gray-900 md:text-2xl dark:text-white">
                 Add Profile
               </h1>
 
@@ -433,7 +433,7 @@ export default function Onboarding() {
                     <div key={index}>
                       <label
                         htmlFor={field.id}
-                        className="block mb-2 text-sm font-medium font-silka text-instant-600 dark:text-white"
+                        className="block mb-2 text-sm font-medium font-silka text-instant-textdark dark:text-white"
                       >
                         {field.label}
                       </label>
@@ -443,7 +443,7 @@ export default function Onboarding() {
                         id={field.id}
                         value={field.value}
                         onChange={field.onChange}
-                        className="bg-gray-50 border border-gray-300 font-silka text-instant-600 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 border border-gray-300 font-silka text-instant-textdark sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder={field.placeholder}
                         required={field.required}
                       />
@@ -457,7 +457,7 @@ export default function Onboarding() {
                     <div key={index}>
                       <label
                         htmlFor={field.id}
-                        className="block mb-2 text-sm font-medium font-silka text-instant-600 dark:text-white"
+                        className="block mb-2 text-sm font-medium font-silka text-instant-textdark dark:text-white"
                       >
                         {field.label}
                       </label>
@@ -466,7 +466,7 @@ export default function Onboarding() {
                         id={field.id}
                         onChange={field.onChange}
                         value={field.value}
-                        className="bg-gray-50 border border-gray-300 font-silka text-instant-600 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 border border-gray-300 font-silka text-instant-textdark sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       >
                         {/* This is to prevent this option from being clickable */}
 
@@ -500,7 +500,7 @@ export default function Onboarding() {
                     <div>
                       <label
                         htmlFor="file"
-                        className="block mb-2 text-sm font-medium font-silka text-instant-600 dark:text-white"
+                        className="block mb-1 text-sm font-medium font-silka text-instant-textdark dark:text-white"
                       >
                         Input CV
                       </label>
@@ -512,12 +512,62 @@ export default function Onboarding() {
                         name="resume_url"
                         type="file"
                       />
-                      <div className="font-silka text-instant-600">
-                        {uploadPdfProgress === 1
-                          ? ""
-                          : uploadPdfProgress === 2
-                          ? "uploading.."
-                          : "upload successful"}
+
+                      <div className="font-silka text-instant-textdark">
+                        {uploadPdfProgress === 0 ? (
+                          ""
+                        ) : uploadPdfProgress === 1 ? (
+                          <>
+                            <div className="flex justify-between mb-1">
+                              <span className="text-base font-medium text-instant-600 dark:text-white">
+                                Uploading
+                              </span>
+                              <span className="text-sm font-medium text-instant-600 dark:text-white">
+                                0%
+                              </span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                              <div
+                                className="bg-blue-600 h-2.5 rounded-full"
+                                style={{ width: "0%" }}
+                              ></div>
+                            </div>
+                          </>
+                        ) : uploadPdfProgress === 2 ? (
+                          <>
+                            <div className="flex justify-between mb-1">
+                              <span className="text-base font-medium text-instant-600 dark:text-white">
+                                Uploading
+                              </span>
+                              <span className="text-sm font-medium text-instant-600 dark:text-white">
+                                45%
+                              </span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                              <div
+                                className="bg-blue-600 h-2.5 rounded-full"
+                                style={{ width: "45%" }}
+                              ></div>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="flex justify-between mb-1">
+                              <span className="text-base font-medium text-instant-600 dark:text-white">
+                                Uploaded
+                              </span>
+                              <span className="text-sm font-medium text-instant-600 dark:text-white">
+                                100%
+                              </span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                              <div
+                                className="bg-blue-600 h-2.5 rounded-full"
+                                style={{ width: "100%" }}
+                              ></div>
+                            </div>
+                          </>
+                        )}
                       </div>
                     </div>
                   </>
@@ -540,7 +590,7 @@ export default function Onboarding() {
                           <path
                             fill-rule="evenodd"
                             d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           ></path>
                         </svg>
                         Back
@@ -553,7 +603,19 @@ export default function Onboarding() {
                         className="mb-6 inline-flex items-center px-4 py-2 mr-3 text-sm font-silka font-medium ring-2 ring-instant-600 text-white bg-instant-600 border border-instant-600 rounded-lg hover:bg-instant-600 hover:text-white dark:bg-instant-600 dark:border-instant-600 dark:text-instant-600 dark:hover:bg-instant-600 dark:hover:text-white"
                         onClick={() => nextPage(finalStepNumber)}
                       >
-                        Next
+                        Next{" "}
+                        <svg
+                          className="ml-2 -mr-1 w-5 h-5"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
                       </button>
                     )}
                   </div>
@@ -595,11 +657,33 @@ export default function Onboarding() {
                           : `bg-primary-600 hover:bg-primary-700`
                       }`}
                     >
-                      {uploadProgress === 1
-                        ? "Create a profile"
-                        : uploadProgress === 2
-                        ? "Uploading..."
-                        : "Uploaded"}
+                      {uploadProgress === 1 ? (
+                        "Create a profile"
+                      ) : uploadProgress === 2 ? (
+                        <>
+                          {" "}
+                          <svg
+                            aria-hidden="true"
+                            role="status"
+                            className="inline w-4 h-4 mr-3 text-white animate-spin"
+                            viewBox="0 0 100 101"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                              fill="#E5E7EB"
+                            />
+                            <path
+                              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                              fill="currentColor"
+                            />
+                          </svg>{" "}
+                          <span>Uploading...</span>
+                        </>
+                      ) : (
+                        "Uploaded"
+                      )}
                     </button>
                   </>
                 )}
@@ -612,23 +696,23 @@ export default function Onboarding() {
   );
 }
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
-  // Check if we have a session
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+// export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+//   // Create authenticated Supabase Client
+//   const supabase = createServerSupabaseClient(ctx);
+//   // Check if we have a session
+//   const {
+//     data: { session },
+//   } = await supabase.auth.getSession();
 
-  if (!session)
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
+//   if (!session)
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
 
-  return {
-    props: { session },
-  };
-};
+//   return {
+//     props: { session },
+//   };
+// };
