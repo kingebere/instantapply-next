@@ -237,7 +237,7 @@ export default function Home() {
           className="py-8 px-4 mx-auto max-w-screen-lg lg:px-12 sm:text-center lg:py-16"
         >
           <iframe
-            src="https://www.loom.com/embed/1d654172f0a3493da5a1bfb5e3cf498a"
+            src="https://www.loom.com/embed/70287c1e17764e59a0ccc5252a1601d6"
             title="instant-loom-video"
             allowFullScreen
             style={{
