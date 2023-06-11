@@ -83,9 +83,9 @@ export default function Home() {
             Apply to job applications faster with instant autofill{" "}
           </p> */}
           <p className="mb-8 text-lg  text-instant-textgrey font-silka font-medium  sm:px-16 xl:px-60 dark:text-gray-400">
-            Submit job applications—10x faster. InstantApply autofills
-            your work history on job boards as faster as lightening with just a
-            single click{" "}
+            Submit job applications—10x faster. InstantApply autofills your work
+            history on job boards as faster as lightening with just a single
+            click{" "}
           </p>
           <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <div
