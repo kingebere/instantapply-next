@@ -28,6 +28,9 @@ export default function Dashboard() {
           "Dec",
         ],
       },
+      
+        colors: ['#006aff']
+      
     },
     series: [
       {
@@ -261,7 +264,7 @@ export default function Dashboard() {
                           5,355
                         </span>
                         <h3 className="text-base font-normal text-gray-500 dark:text-gray-400">
-                          New Jobs this week
+                          Applied Jobs
                         </h3>
                       </div>
                       <div className="flex flex-1 justify-end items-center ml-5 w-0 text-base font-bold text-green-500 dark:text-green-400">
