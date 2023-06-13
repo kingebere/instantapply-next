@@ -9,6 +9,7 @@ export default async function handler(
     "https://jobs.lever.co",
     "https://boards.greenhouse.io",
     "https://jobs.ashbyhq.com",
+    "https://mail.google.com",
   ];
 
   //since Access-Control-Allow-Origin doesnt allow multiple value , we
