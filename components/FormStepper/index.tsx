@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent,useState,useEffect } from "react";
 
 export default function FormStepper({
   active,
@@ -53,15 +53,50 @@ export default function FormStepper({
   nextPage: (finalStepNumber: number) => void;
   title: string;
 }) {
+    const [items, setItems] = useState<JSX.Element[]>([]);
+  
+    useEffect(()=>{
+     let result: JSX.Element[] = [];    
+      for (let i = 2; i < finalStepNumber; i++) {
+      result.push(
+        active > i ? (
+          <li key={i} className="flex w-full items-center text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-600 after:border-4 after:inline-block dark:after:border-instant-600">
+            <span className="flex items-center justify-center w-10 h-10 bg-instant-600 rounded-full lg:h-12 lg:w-12 dark:bg-instant-600 shrink-0">
+              <svg
+                aria-hidden="true"
+                className="w-5 h-5 text-white lg:w-6 lg:h-6 dark:text-white"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+              </svg>
+            </span>
+          </li>
+        ) : (
+          <li key={i} className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block text-blue-600 dark:text-blue-500">
+            <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-600 border-instant-600 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+              {i}
+            </span>{" "}
+          </li>
+        )
+      );
+    }
+    
+    setItems(result);  
+    },[active, finalStepNumber])
+  
+    
+    
   return (
     <>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
         <div className="sm:max-w-md w-full flex justify-center items-center mt-6 mb-4">
           <ol className="flex items-center w-full">
-            {active === 1 ? (
+            {active === firstStepNumber ? (
               <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block  text-blue-600 dark:text-blue-500 ">
                 <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-600 border-instant-600  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
-                  1
+                  {firstStepNumber}
                 </span>{" "}
               </li>
             ) : (
@@ -84,34 +119,12 @@ export default function FormStepper({
               </li>
             )}
 
-            {active === 3 ? (
-              <li className="flex w-full items-center  text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-instant-600 after:border-4 after:inline-block dark:after:border-instant-600">
-                <span className="flex items-center justify-center w-10 h-10 bg-instant-600 rounded-full lg:h-12 lg:w-12 dark:bg-instant-600 shrink-0">
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5 text-white lg:w-6 lg:h-6 dark:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </span>
-              </li>
-            ) : (
-              <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block text-blue-600 dark:text-blue-500 ">
-                <span className="flex items-center justify-center  w-10 h-10 bg-white border font-semibold text-instant-600 border-instant-600  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
-                  2
-                </span>{" "}
-              </li>
-            )}
+
+            { items}
+
             <li className="flex items-center">
               <span className="flex items-center justify-center w-10 h-10 bg-white border font-semibold text-instant-600 border-instant-600  rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
-                3
+               {finalStepNumber}
               </span>
             </li>
           </ol>

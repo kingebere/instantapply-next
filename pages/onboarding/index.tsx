@@ -54,6 +54,7 @@ export default function Onboarding() {
   const [uploadProgress, setUploadProgress] = useState<number>(1);
   const [uploadPdfProgress, setUploadPdfProgress] = useState<number>(0);
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState<string>("");
+  const [stepperTitle,setStepperTitle]= useState<string>("Add Profile")
   const areAllValuesFilled = (obj: Record<string, any>) => {
     // Iterate over each key in the object
     for (const key in obj) {
@@ -363,7 +364,7 @@ export default function Onboarding() {
       <section className="bg-white dark:bg-white mt-4">
         <FormStepper
           active={active}
-          title="Add Profile"
+          title={stepperTitle}
           inputFields={inputFields}
           handleChange={handleChange}
           selectFields={selectFields}
