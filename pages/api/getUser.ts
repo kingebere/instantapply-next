@@ -7,7 +7,8 @@ export default async function handler(
 ) {
   const allowedOrigin = [
     "https://jobs.lever.co",
-    "https://boards.greenhouse.io","https://jobs.ashbyhq.com"
+    "https://boards.greenhouse.io",
+    "https://jobs.ashbyhq.com",
   ];
 
   //since Access-Control-Allow-Origin doesnt allow multiple value , we
@@ -53,7 +54,11 @@ export default async function handler(
         data: dbdata[0],
       });
     } else throw new Error("User not found");
+    
   } catch (err: any) {
+
     res.status(500).json({ message: "Internal Server Error" });
+    
+  
   }
 }
