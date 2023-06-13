@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   const allowedOrigin = [
     "https://jobs.lever.co",
-    "https://boards.greenhouse.io",
+    "https://boards.greenhouse.io","https://jobs.ashbyhq.com"
   ];
 
   //since Access-Control-Allow-Origin doesnt allow multiple value , we
