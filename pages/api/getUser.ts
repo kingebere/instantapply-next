@@ -10,6 +10,8 @@ export default async function handler(
     "https://boards.greenhouse.io",
     "https://jobs.ashbyhq.com",
     "https://mail.google.com",
+    "https://*.bamboohr.com" ,
+    "https://*.bamboohr.co.uk",
   ];
 
   //since Access-Control-Allow-Origin doesnt allow multiple value , we
