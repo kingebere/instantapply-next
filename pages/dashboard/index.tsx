@@ -1,13 +1,17 @@
 import { GetServerSidePropsContext } from "next";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+
+const unirest = require("unirest");
+const cheerio = require("cheerio");
+// import unirest from 'unirest';
 
 //This fixes the "window is undefined" error
 import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export default function Dashboard() {
+export default function Dashboard(props: any) {
   const data = {
     options: {
       chart: {
@@ -39,6 +43,11 @@ export default function Dashboard() {
       },
     ],
   };
+
+
+  console.log(props)
+
+  
   return (
     <>
       <header>
@@ -128,6 +137,7 @@ export default function Dashboard() {
                         </svg>
                       </div>
                     </div>
+                    {/* <div>{props}</div> */}
                     <div id="new-products-chart" className="overflow-x-scroll">
                       <Chart
                         options={data.options}
@@ -898,26 +908,77 @@ export default function Dashboard() {
   );
 }
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
-  // Check if we have a session
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+// export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+//   // Create authenticated Supabase Client
+//   const supabase = createServerSupabaseClient(ctx);
+//   // Check if we have a session
+//   const {
+//     data: { session },
+//   } = await supabase.auth.getSession();
 
-  if (!session)
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
+//   if (!session)
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
 
+//   return {
+//     props: { session },
+//   };
+// };
+
+export async function getServerSideProps() {
+  const resp = await unirest
+    .get("https://www.google.com/search?q=site%3Alever.co+remote+software+engineer+after%3A2023-04-01&rlz=1C1GCEU_enNG1018NG1018&oq=site%3Alever.co+remote+software+engineer+after%3A2023-04-01&aqs=chrome..69i57j69i58.1148j0j9&sourceid=chrome&ie=UTF-8")
+    .headers({
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+    })
+    .then((response: { body: any; }) => {
+      let $ = cheerio.load(response.body);
+
+      let titles: any = [];
+      let links:any = [];
+      let snippets:any = [];
+      let displayedLinks:any = [];
+
+      $(".yuRUbf > a > h3").each((i: string | number, el: any) => {
+        titles[i] = $(el).text();
+      });
+      $(".yuRUbf > a").each((i: string | number, el: any) => {
+        links[i] = $(el).attr("href");
+      });
+      $(".g .VwiC3b ").each((i: string | number, el: any) => {
+        snippets[i] = $(el).text();
+      });
+      $(".g .yuRUbf .NJjxre .tjvcx").each((i: string | number, el: any) => {
+        displayedLinks[i] = $(el).text();
+      });
+
+      const organicResults = [];
+
+      for (let i = 0; i < titles.length; i++) {
+        organicResults[i] = {
+          title: titles[i],
+          links: links[i],
+          snippet: snippets[i],
+          displayedLink: displayedLinks[i],
+        };
+      }
+      console.log( titles)
+
+      return organicResults
+      
+    });
+
+  
   return {
-    props: { session },
-  };
-};
+    props:{data:resp},
+  }
 
+
+}
 
 

@@ -77,7 +77,7 @@ export default function Home() {
         </a> */}
           <h1 className="mb-4 text-4xl font-extrabold font-silka tracking-tight leading-tight text-instant-600 md:text-5xl lg:text-8xl px-5 dark:text-white">
             Autofill your Job{" "}
-            <h1 className="text-instant-text">Applications in one click</h1>
+            <span className="text-instant-text">Applications in one click</span>
           </h1>
           {/* <p className="mb-8 text-lg  text-instant-textgrey font-silka font-medium lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
             Apply to job applications faster with instant autofill{" "}
