@@ -36,17 +36,17 @@ export default async function handler(
   }
   const { jobDescription } = req.body;
   try {
-      const { data, error } = await supabase
-          .from("jobsSubmitted")
-          .insert(jobDescription);
-      if (error) console.log(error);
+    const { data, error } = await supabase
+      .from("jobsSubmitted")
+      .insert(jobDescription);
+    if (error) console.log(error);
 
-      return res.status(200).json({
-          data: data,
-      });
+    return res.status(200).json({
+      data: data,
+    });
   } catch (error) {
-      return res.status(500).json({
-          message: "Internal Server Error",
-      });
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
   }
 }

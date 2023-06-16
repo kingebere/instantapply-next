@@ -10,7 +10,7 @@ export default async function handler(
     "https://boards.greenhouse.io",
     "https://jobs.ashbyhq.com",
     "https://mail.google.com",
-    "https://*.bamboohr.com" ,
+    "https://*.bamboohr.com",
     "https://*.bamboohr.co.uk",
   ];
 
@@ -57,11 +57,7 @@ export default async function handler(
         data: dbdata[0],
       });
     } else throw new Error("User not found");
-    
   } catch (err: any) {
-
     res.status(500).json({ message: "Internal Server Error" });
-    
-  
   }
 }
