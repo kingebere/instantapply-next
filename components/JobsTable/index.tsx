@@ -70,8 +70,8 @@ const JobsTable = () => {
 										</tr>
 									</thead>
 									<tbody className='bg-white dark:bg-gray-800'>
-										{jobs.slice(0, 10)?.map((job: Jobs) => (
-											<tr>
+										{jobs.slice(0, 10)?.map((job: Jobs,i) => (
+											<tr key={i}>
 												<td className='p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white'>
 													<span className='font-semibold'>{job.position}</span>
 												</td>
@@ -100,7 +100,7 @@ const JobsTable = () => {
 							) : (
 								<div className='flex items-center justify-center'>
 									<h3 className='font-bold text-gray-500 text-lg'>
-										You haven't Applied For any Jobs at this Time{" "}
+										You haven&apos;t Applied For any Jobs at this Time{" "}
 									</h3>
 								</div>
 							)}
