@@ -75,10 +75,10 @@ export default function Home() {
             <span className="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span className="text-sm font-medium">InstantApply is out! See what&apos;s new</span> 
             <svg className="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
         </a> */}
-          <h1 className="mb-4 text-4xl font-extrabold font-silka tracking-tight leading-tight text-instant-600 md:text-5xl lg:text-8xl px-5 dark:text-white">
+          <span className="mb-4 text-4xl font-extrabold font-silka tracking-tight leading-tight text-instant-600 md:text-5xl lg:text-8xl px-5 dark:text-white">
             Autofill your Job{" "}
             <h1 className="text-instant-text">Applications in one click</h1>
-          </h1>
+          </span>
           {/* <p className="mb-8 text-lg  text-instant-textgrey font-silka font-medium lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
             Apply to job applications faster with instant autofill{" "}
           </p> */}
