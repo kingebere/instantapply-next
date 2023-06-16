@@ -55,3 +55,17 @@ export async function getUserJobs(user: any) {
 
 	return data;
 }
+
+export async function getUserJobsCount(user: any) {
+	if (!user) return;
+
+  const { count, error } = await supabase
+		.from("jobsSubmitted")
+		.select("*", { count: 'exact', head: true })
+		.eq("userID", user.id);
+
+	if (error) console.log(error);
+
+	return count;
+}
+

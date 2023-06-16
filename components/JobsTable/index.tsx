@@ -1,19 +1,31 @@
 import useAuth from "@/hooks/useAuth";
 import { Jobs, useUserJobs } from "@/hooks/useUserJobs";
 import { formatDate } from "@/utils/formatDate";
-import { useEffect } from "react";
-
+import {useState, useEffect } from "react";
+import { getUserJobsCount } from "@/supabase";
 const JobsTable = () => {
 	const user = useAuth();
 	const jobs = useUserJobs(user);
+const [count,setCount]=useState<number>(0)
 
+	useEffect(()=>{
+		async function jobCount(){
+
+    const data= await getUserJobsCount(user)
+	if (data){
+			setCount(data)
+	}
+
+		}
+		jobCount()
+	},[user])
 	return (
 		<div className='p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800 mt-4'>
 			{/* Card Title */}
 			<div className='flex justify-between items-center mb-4'>
 				<div>
 					<h3 className='mb-2 text-xl font-bold text-gray-900 dark:text-white'>
-						Jobs
+					{count}	Job{count>1?`s`:``}
 					</h3>
 					<span className='text-base font-normal text-gray-500 dark:text-gray-400'>
 						List of Jobs Applied For
