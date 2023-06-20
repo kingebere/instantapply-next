@@ -98,8 +98,11 @@ export default function FormStepper({
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0" >
-        <div className="sm:max-w-md w-full flex justify-center items-center mt-6 mb-4" title='indicator'>
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
+        <div
+          className="sm:max-w-md w-full flex justify-center items-center mt-6 mb-4"
+          title="indicator"
+        >
           <ol className="flex items-center w-full">
             {active === firstStepNumber ? (
               <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block  text-blue-600 dark:text-blue-500 ">
@@ -139,7 +142,10 @@ export default function FormStepper({
 
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 role="heading" className="text-xl font-bold leading-tight tracking-tight font-silka text-instant-textdark text-gray-900 md:text-2xl dark:text-white">
+            <h1
+              role="heading"
+              className="text-xl font-bold leading-tight tracking-tight font-silka text-instant-textdark text-gray-900 md:text-2xl dark:text-white"
+            >
               {title}
             </h1>
 
@@ -309,7 +315,8 @@ export default function FormStepper({
                     <button
                       onClick={() => prevPage(firstStepNumber)}
                       className="mb-6 inline-flex items-center px-4 py-2 mr-3 text-sm font-medium font-silka ring-2 ring-instant-600 text-instant-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                      title='prevbutton'  >
+                      title="prevbutton"
+                    >
                       <svg
                         aria-hidden="true"
                         className="w-5 h-5 mr-2"
@@ -330,10 +337,9 @@ export default function FormStepper({
                   )}
                   {active !== finalStepNumber && (
                     <button
-                     title='nextbutton'
+                      title="nextbutton"
                       className="mb-6 inline-flex items-center px-4 py-2 mr-3 text-sm font-silka font-medium ring-2 ring-instant-600 text-white bg-instant-600 border border-instant-600 rounded-lg hover:bg-instant-600 hover:text-white dark:bg-instant-600 dark:border-instant-600 dark:text-instant-600 dark:hover:bg-instant-600 dark:hover:text-white"
                       onClick={() => nextPage(finalStepNumber)}
-                      
                     >
                       Next{" "}
                       <svg
@@ -352,7 +358,6 @@ export default function FormStepper({
                   )}
                 </div>
               </>
-              
 
               {/* <div className="flex items-start">
                   <div className="flex items-center h-5">
