@@ -13,25 +13,24 @@ it("checkIndicatorRender", () => {
         event: React.ChangeEvent<HTMLInputElement>
       ): void {
         throw new Error("Function not implemented.");
-      }}
+      } }
       selectFields={[]}
       uploadPdfProgress={0}
       pdfPreviewUrl={""}
       uploadProgress={0}
       formSubmit={function (e: React.FormEvent<HTMLFormElement>): void {
         throw new Error("Function not implemented.");
-      }}
+      } }
       firstStepNumber={0}
       prevPage={function (firstStepNumber: number): void {
         throw new Error("Function not implemented.");
-      }}
+      } }
       finalStepNumber={0}
       isButtonDisabled={false}
       nextPage={function (finalStepNumber: number): void {
         throw new Error("Function not implemented.");
-      }}
-      title={""}
-    />
+      } }
+      title={""} textAreaFields={[]}    />
   );
   const btn = queryByTitle("indicator");
   expect(btn).toBeTruthy();
@@ -44,25 +43,24 @@ it("checkPrevBtnClick", async () => {
       inputFields={[]}
       handleChange={(event) => {
         throw new Error("Function not implemented.");
-      }}
+      } }
       selectFields={[]}
       uploadPdfProgress={0}
       pdfPreviewUrl={""}
       uploadProgress={0}
       formSubmit={(e) => {
         throw new Error("Function not implemented.");
-      }}
+      } }
       firstStepNumber={0}
       prevPage={(firstStepNumber) => {
         throw new Error("Function not implemented.");
-      }}
+      } }
       finalStepNumber={0}
       isButtonDisabled={false}
       nextPage={(finalStepNumber) => {
         throw new Error("Function not implemented.");
-      }}
-      title={""}
-    />
+      } }
+      title={""} textAreaFields={[]}    />
   );
 
   const btn = screen.queryByTitle("prevbutton");
@@ -78,25 +76,24 @@ it("checkNextBtnClick", async () => {
       inputFields={[]}
       handleChange={(event) => {
         throw new Error("Function not implemented.");
-      }}
+      } }
       selectFields={[]}
       uploadPdfProgress={0}
       pdfPreviewUrl={""}
       uploadProgress={0}
       formSubmit={(e) => {
         throw new Error("Function not implemented.");
-      }}
+      } }
       firstStepNumber={0}
       prevPage={(firstStepNumber) => {
         throw new Error("Function not implemented.");
-      }}
+      } }
       finalStepNumber={0}
       isButtonDisabled={false}
       nextPage={(finalStepNumber) => {
         throw new Error("Function not implemented.");
-      }}
-      title={""}
-    />
+      } }
+      title={""} textAreaFields={[]}    />
   );
 
   const btn = screen.queryByTitle("nextbutton");
@@ -113,25 +110,24 @@ describe("Title", () => {
         inputFields={[]}
         handleChange={(event) => {
           throw new Error("Function not implemented.");
-        }}
+        } }
         selectFields={[]}
         uploadPdfProgress={0}
         pdfPreviewUrl={""}
         uploadProgress={0}
         formSubmit={(e) => {
           throw new Error("Function not implemented.");
-        }}
+        } }
         firstStepNumber={0}
         prevPage={(firstStepNumber) => {
           throw new Error("Function not implemented.");
-        }}
+        } }
         finalStepNumber={0}
         isButtonDisabled={false}
         nextPage={(finalStepNumber) => {
           throw new Error("Function not implemented.");
-        }}
-        title={"Add Profile.js"}
-      />
+        } }
+        title={"Add Profile.js"} textAreaFields={[]}      />
     );
 
     const heading = screen.getByRole("heading", {

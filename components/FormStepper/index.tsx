@@ -15,6 +15,7 @@ export default function FormStepper({
   isButtonDisabled,
   nextPage,
   title,
+  textAreaFields
 }: {
   active: number;
   inputFields: {
@@ -25,6 +26,19 @@ export default function FormStepper({
     value: string;
     onChange: (
       event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => void;
+    placeholder: string;
+    required: boolean;
+    step: number;
+  }[];
+  textAreaFields: {
+    label: string;
+
+    name: string;
+    id: string;
+    value: string;
+    onChange: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement|HTMLTextAreaElement>
     ) => void;
     placeholder: string;
     required: boolean;
@@ -173,6 +187,32 @@ export default function FormStepper({
                     />
                   </div>
                 ))}
+
+
+   {/* This maps the textarea tag */}
+   {textAreaFields
+                .filter((items: { step: number }) => items.step === active)
+                .map((field, index: React.Key | null | undefined) => (
+                  <div key={index}>
+                    <label
+                      htmlFor={field.id}
+                      className="block mb-2 text-sm font-medium font-silka text-instant-textdark dark:text-white"
+                    >
+                      {field.label}
+                    </label>
+                    <textarea
+                    
+                      name={field.name}
+                      id={field.id}
+                      value={field.value}
+                      onChange={field.onChange}
+                      className="bg-gray-50 border border-gray-300 font-silka text-instant-textdark sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder={field.placeholder}
+                      required={field.required}
+                    />
+                  </div>
+                ))}
+
               {/* This maps the select tag */}
 
               {selectFields
@@ -218,6 +258,8 @@ export default function FormStepper({
                     </select>
                   </div>
                 ))}
+            
+              
 
               {/* Since we want the resume to be the last thing a user fills , we
                 dont add it to the array */}
