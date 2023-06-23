@@ -17,11 +17,11 @@ export default function Profile() {
       if (user ) {
         const userDetails: any =
           await getUserProfile(user);
-     if(userDetails)   setUserProfile(userDetails);
+     if(userDetails)  { setUserProfile(userDetails);}
       }
     }
     getProfile();
-  }, [user]);
+  }, []);
 console.log(user,'user')
 console.log('profile',userprofile)
   return (
