@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { getUserProfile, supabase } from "../supabase";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
-import useAuth from "@/hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 type UserProfile = {
   [x: string]: string;
 };
