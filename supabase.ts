@@ -70,12 +70,12 @@ export async function getUserJobsCount(user: any) {
 }
 
 export async function getUserProfile(user: any) {
-  if (user) {
+  if (!user) return;
     const { data, error } = await supabase
       .from("profile")
       .select("*")
       .eq("id", user.id);
 
     return data;
-  }
+  
 }

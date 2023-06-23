@@ -9,9 +9,9 @@ import useAuth from "@/hooks/useAuth";
 type UserProfile = {
   [x: string]: string;
 };
-export default function Profile({ user }: any) {
+export default function Profile() {
   const [userprofile, setUserProfile] = useState<any>();
-  const users = useAuth();
+  const user = useAuth();
   useEffect(() => {
     async function getProfile() {
       if (user || user?.id) {
@@ -22,7 +22,7 @@ export default function Profile({ user }: any) {
     }
     getProfile();
   }, [user]);
-console.log(users,'user')
+console.log(user,'user')
 console.log('profile',userprofile)
   return (
     <>

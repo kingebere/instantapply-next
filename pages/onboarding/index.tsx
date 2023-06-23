@@ -72,7 +72,7 @@ export default function Onboarding() {
     // If all values are filled, return false
     return false;
   };
-console.log(user)
+
   useEffect(() => {
     setIsButtonDisabled(areAllValuesFilled(formData));
   }, [formData]);
