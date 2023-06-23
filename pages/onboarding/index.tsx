@@ -29,7 +29,7 @@ interface FormDataInterface {
   disabilitystatus: string;
   veteranstatus: string;
   currentCompany: string;
-  gmailContent:string;
+  gmailContent: string;
 }
 
 export default function Onboarding() {
@@ -49,7 +49,7 @@ export default function Onboarding() {
     disabilitystatus: "",
     veteranstatus: "",
     currentCompany: "",
-    gmailContent:"",
+    gmailContent: "",
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [active, setActive] = useState<number>(1);
@@ -77,19 +77,19 @@ export default function Onboarding() {
     setIsButtonDisabled(areAllValuesFilled(formData));
   }, [formData]);
 
-  const textAreaFields=[
+  const textAreaFields = [
     {
       label: "Your gmailContent",
-   
+
       name: "gmailContent",
       id: "gmailContent",
       value: formData.gmailContent,
       onChange: updateName,
       placeholder: "put your content here",
       required: true,
-      step: 1,
+      step: 2,
     },
-  ]
+  ];
 
   const inputFields = [
     {
@@ -353,7 +353,9 @@ export default function Onboarding() {
 
   //add input values to the formdata state
   function updateName(
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement|HTMLTextAreaElement>
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) {
     const fieldName = event.target.name;
     setFormData((prev) => ({
@@ -363,7 +365,7 @@ export default function Onboarding() {
       [fieldName]: event.target.value,
     }));
   }
-console.log(formData.gmailContent)
+
   //submit formdata
   async function formSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

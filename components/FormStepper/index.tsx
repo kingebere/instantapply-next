@@ -15,7 +15,7 @@ export default function FormStepper({
   isButtonDisabled,
   nextPage,
   title,
-  textAreaFields
+  textAreaFields,
 }: {
   active: number;
   inputFields: {
@@ -38,7 +38,9 @@ export default function FormStepper({
     id: string;
     value: string;
     onChange: (
-      event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement|HTMLTextAreaElement>
+      event: React.ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >
     ) => void;
     placeholder: string;
     required: boolean;
@@ -188,9 +190,8 @@ export default function FormStepper({
                   </div>
                 ))}
 
-
-   {/* This maps the textarea tag */}
-   {textAreaFields
+              {/* This maps the textarea tag */}
+              {textAreaFields
                 .filter((items: { step: number }) => items.step === active)
                 .map((field, index: React.Key | null | undefined) => (
                   <div key={index}>
@@ -201,7 +202,6 @@ export default function FormStepper({
                       {field.label}
                     </label>
                     <textarea
-                    
                       name={field.name}
                       id={field.id}
                       value={field.value}
@@ -258,8 +258,6 @@ export default function FormStepper({
                     </select>
                   </div>
                 ))}
-            
-              
 
               {/* Since we want the resume to be the last thing a user fills , we
                 dont add it to the array */}

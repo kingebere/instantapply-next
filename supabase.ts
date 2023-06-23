@@ -68,3 +68,14 @@ export async function getUserJobsCount(user: any) {
 
   return count;
 }
+
+export async function getUserProfile(user: any) {
+  if (user) {
+    const { data, error } = await supabase
+      .from("profile")
+      .select("*")
+      .eq("id", user.id);
+
+    return data;
+  }
+}
