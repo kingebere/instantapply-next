@@ -22,7 +22,8 @@ export default function Profile({ user }: any) {
     }
     getProfile();
   }, [user]);
-
+console.log(user,'user')
+console.log('profile',userprofile)
   return (
     <>
       <Main>
