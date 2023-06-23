@@ -14,10 +14,11 @@ export default function Profile() {
   const user = useAuth();
   useEffect(() => {
     async function getProfile() {
-      if (user || user?.id) {
-        const userDetails: any =
-          await getUserProfile(user);
-     if(userDetails)   setUserProfile(userDetails);
+      if (user && user.id) {
+        const userDetails = await getUserProfile(user);
+        if (userDetails) {
+          setUserProfile(userDetails);
+        }
       }
     }
     getProfile();
