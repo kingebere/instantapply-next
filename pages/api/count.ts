@@ -58,7 +58,9 @@ export default async function handler(
 				message: "internal server error",
 			});
 		}
-	} else if (req.method === "POST") {
+    }
+    
+    if (req.method === "POST") {
 		const { userID } = req.body;
 
 		try {
