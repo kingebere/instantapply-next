@@ -10,16 +10,14 @@ type UserProfile = {
   [x: string]: string;
 };
 export default function Profile({ user }: any) {
-  const [userprofile, setUserProfile] = useState<
-    UserProfile[] | undefined | null
-  >([]);
+  const [userprofile, setUserProfile] = useState<any>();
 
   useEffect(() => {
     async function getProfile() {
       if (user || user?.id) {
-        const userDetails: UserProfile[] | undefined | null =
+        const userDetails: any =
           await getUserProfile(user);
-        setUserProfile(userDetails);
+     if(userDetails)   setUserProfile(userDetails);
       }
     }
     getProfile();
