@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import useAuth from "@/hooks/useAuth";
+
 import { getUserProfile, supabase } from "../supabase";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
@@ -9,19 +9,19 @@ import { GetServerSidePropsContext } from "next";
 type UserProfile = {
   [x: string]: string;
 };
-export default function Profile() {
+export default function Profile({ user }: any) {
   const [userprofile, setUserProfile] = useState<any>();
-  const user = useAuth();
+
   useEffect(() => {
     async function getProfile() {
-      if (user ) {
+      if (user || user?.id) {
         const userDetails: any =
           await getUserProfile(user);
-     if(userDetails)  { setUserProfile(userDetails);}
+     if(userDetails)   setUserProfile(userDetails);
       }
     }
     getProfile();
-  }, []);
+  }, [user]);
 console.log(user,'user')
 console.log('profile',userprofile)
   return (
