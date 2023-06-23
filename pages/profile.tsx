@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import { getUserProfile, supabase } from "../supabase";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
-
+import useAuth from "@/hooks/useAuth";
 type UserProfile = {
   [x: string]: string;
 };
 export default function Profile({ user }: any) {
   const [userprofile, setUserProfile] = useState<any>();
-
+  const users = useAuth();
   useEffect(() => {
     async function getProfile() {
       if (user || user?.id) {
@@ -22,7 +22,7 @@ export default function Profile({ user }: any) {
     }
     getProfile();
   }, [user]);
-console.log(user,'user')
+console.log(users,'user')
 console.log('profile',userprofile)
   return (
     <>
