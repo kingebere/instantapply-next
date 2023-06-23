@@ -52,7 +52,6 @@ export default async function handler(
       .select("*")
       .eq("id", user?.id);
     if (dbdata) {
-      console.log(dbdata[0])
       // Return the retrieved data if it exists
       return res.status(200).json({
         data: dbdata[0],
