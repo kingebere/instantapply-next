@@ -5,26 +5,24 @@ import { useRouter } from "next/router";
 import { getUserProfile, supabase } from "../supabase";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
-import useAuth from "../hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 type UserProfile = {
   [x: string]: string;
 };
-export default function Profile() {
+export default function Profile({ user }: any) {
   const [userprofile, setUserProfile] = useState<any>();
-  const user = useAuth();
+  const users = useAuth();
   useEffect(() => {
     async function getProfile() {
-      if (user && user.id) {
-        const userDetails = await getUserProfile(user);
-        if (userDetails) {
-          setUserProfile(userDetails);
-        }
+      if (user || user?.id) {
+        const userDetails: any = await getUserProfile(user);
+        if (userDetails) setUserProfile(userDetails);
       }
     }
     getProfile();
   }, [user]);
-console.log(user,'user')
-console.log('profile',userprofile)
+  console.log(users, "user");
+  console.log("profile", userprofile);
   return (
     <>
       <Main>
@@ -291,22 +289,22 @@ const Main = styled.main`
 `;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-    // Create authenticated Supabase Client
-    const supabase = createServerSupabaseClient(ctx);
-    // Check if we have a session
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-  
-    if (!session)
-      return {
-        redirect: {
-          destination: "/",
-          permanent: false,
-        },
-      };
-  
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
     return {
-      props: { session },
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
     };
+
+  return {
+    props: { session },
   };
+};

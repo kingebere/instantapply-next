@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "next/font/google";
@@ -14,6 +15,21 @@ export default function Home() {
   const canonicalUrl = (
     `https://instantapply.co` + (router.asPath === "/" ? "" : router.asPath)
   ).split("?")[0];
+
+  useEffect(() => {
+    async function getParsedData() {
+      // Send a GET request to the server to get the parsed PDF file
+      const response = await fetch(`/api/pdfParser`, {
+        method: "GET",
+        mode: "cors",
+      });
+
+      // Parse the response data as JSON
+      const res = await response.json();
+      console.log(res, "res");
+    }
+    getParsedData();
+  }, []);
   return (
     <>
       <Head>
