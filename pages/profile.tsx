@@ -30,20 +30,20 @@ console.log('profile',userprofile)
         <div className="wrapper">
           <div className="profile-summary">
             <div className="profile-summary-primary">
-              <h2 className="profile-title">{user?.user?.user_metadata.full_name}</h2>
-              <p className="profile-detail">{user?.user?.user_metadata.email}</p>
+              <h2 className="profile-title">{user?.user_metadata.full_name}</h2>
+              <p className="profile-detail">{user?.user_metadata.email}</p>
             </div>
             <div className="profile-summary-avatar">
-              {user?.user?.user_metadata.avatar_url ? (
+              {user?.user_metadata.avatar_url ? (
                 <img
-                  src={user?.user?.user_metadata.avatar_url}
+                  src={user?.user_metadata.avatar_url}
                   referrerPolicy="no-referrer"
                   className="avatar-img"
-                  alt={`Avatar of ${user?.user?.user_metadata.full_name}`}
+                  alt={`Avatar of ${user?.user_metadata.full_name}`}
                 />
               ) : (
                 <span className="avatar-initials">
-                  {user?.user?.user_metadata.full_name[0]}
+                  {user?.user_metadata.full_name[0]}
                 </span>
               )}
             </div>
@@ -55,7 +55,7 @@ console.log('profile',userprofile)
                 <p>First Name</p>
               </div>
               <div className="profile-detail-value">
-                <p>{user?.user?.user_metadata.full_name.split(" ")[0]}</p>
+                <p>{user?.user_metadata.full_name.split(" ")[0]}</p>
               </div>
             </div>
             <div className="profile-details-row">
@@ -64,7 +64,7 @@ console.log('profile',userprofile)
               </div>
               <div className="profile-detail-value">
                 <p>
-                  {user?.user?.user_metadata.full_name.split(" ")[1]
+                  {user?.user_metadata.full_name.split(" ")[1]
                     ? user.user_metadata.full_name.split(" ")[1]
                     : "Nil"}{" "}
                 </p>
@@ -75,7 +75,7 @@ console.log('profile',userprofile)
                 <p>Email</p>
               </div>
               <div className="profile-detail-value">
-                <p>{user?.user?.user_metadata.email}</p>
+                <p>{user?.user_metadata.email}</p>
               </div>
             </div>
           </div>
