@@ -1,6 +1,7 @@
 import { Session, createClient } from "@supabase/supabase-js";
-import { User } from "aws-sdk/clients/budgets";
-import { Jobs } from "./hooks/useUserJobs";
+
+
+
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";

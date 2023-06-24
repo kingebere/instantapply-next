@@ -42,24 +42,26 @@ export default async function handler(
   if (req.method === "GET") {
     const { userID } = req.query;
 
-    try {
-      const { data, error } = await supabase
-        .from("profile")
-        .select("submitcount")
-        .eq("id", userID);
-      if (error) throw error;
-      if (data) {
-        res.status(200).send({
-          count: data[0].submitcount,
-        });
-      }
-    } catch (e) {
-      res.status(500).json({
-        message: "internal server error",
-      });
+		try {
+			const { data, error } = await supabase
+				.from("profile")
+				.select("submitcount")
+				.eq("id", userID);
+			if (error) throw error;
+			if (data) {
+				res.status(200).send({
+					count: data[0].submitcount,
+				});
+			}
+		} catch (e) {
+			res.status(500).json({
+				message: "internal server error",
+			});
+		}
     }
-  } else if (req.method === "POST") {
-    const { userID } = req.body;
+    
+    if (req.method === "POST") {
+		const { userID } = req.body;
 
     try {
       const { data, error } = await supabase.rpc("submit", {
