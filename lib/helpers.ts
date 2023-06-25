@@ -3,6 +3,7 @@ import pdf from "pdf-parse";
 
 //function for asking chat GPT questions
 export async function askQuestion(question: string) {
+    console.log(process.env.NEXT_PUBLIC_OPENAI_KEY)
 	try {
 		const response = await axios.post(
 			"https://api.openai.com/v1/chat/completions",
@@ -15,7 +16,7 @@ export async function askQuestion(question: string) {
 			},
 			{
 				headers: {
-					Authorization: `Bearer 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`,
+					Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_KEY}`,
 					"Content-Type": "application/json",
 				},
 			}
@@ -73,6 +74,5 @@ export async function getChatGPTResponse(
 	} catch (error: any) {
 		console.log("error happened at getChatGPTResponse", error);
 		throw new Error(error.message);
-		
 	}
 }
