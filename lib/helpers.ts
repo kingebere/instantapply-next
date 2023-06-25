@@ -15,7 +15,7 @@ export async function askQuestion(question: string) {
 			},
 			{
 				headers: {
-					Authorization: `Bearer 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`,
+					Authorization: `Bearer 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`,
 					"Content-Type": "application/json",
 				},
 			}
