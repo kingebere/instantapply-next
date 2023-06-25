@@ -7,7 +7,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     // Perform tracking logic here, such as recording the email open event
     console.log(email, "works");
-    console.log(res, "res");
+    // console.log(res, "res");
     // Respond with the pixel image (1x1 transparent GIF)
     const pixelImage = Buffer.from(
       "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
