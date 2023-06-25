@@ -73,5 +73,6 @@ export async function getChatGPTResponse(
 	} catch (error: any) {
 		console.log("error happened at getChatGPTResponse", error);
 		throw new Error(error.message);
+		
 	}
 }
