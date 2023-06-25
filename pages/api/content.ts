@@ -23,6 +23,7 @@ export default async function handler(
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
 
+  
   // Handle preflight requests
   if (req.method === "OPTIONS") {
     if (allowedOrigin.includes(req.headers.origin as string)) {
