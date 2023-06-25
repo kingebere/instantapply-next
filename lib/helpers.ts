@@ -15,7 +15,7 @@ export async function askQuestion(question: string) {
 			},
 			{
 				headers: {
-					Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_KEY}`,
+					Authorization: `Bearer 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`,
 					"Content-Type": "application/json",
 				},
 			}
