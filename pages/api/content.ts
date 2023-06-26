@@ -14,7 +14,7 @@ export default async function handler(
     "https://*.bamboohr.com",
     "https://*.bamboohr.co.uk",
   ];
-
+console.log("origin",req.headers.origin)
   //since Access-Control-Allow-Origin doesnt allow multiple value , we
   //make a checker that adds the allowed url based on the headers.origin
   if (allowedOrigin.includes(req.headers.origin as string)) {
