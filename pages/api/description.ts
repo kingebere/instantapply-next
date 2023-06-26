@@ -16,8 +16,8 @@ export default async function handler(
 		"https://jobs.ashbyhq.com",
 		"https://mail.google.com",
 		"https://*.bamboohr.com",
-        "https://*.bamboohr.co.uk",
-        "https://api.openai.com"
+		"https://*.bamboohr.co.uk",
+		"https://api.openai.com",
 	];
 
 	//since Access-Control-Allow-Origin doesnt allow multiple value , we
@@ -46,12 +46,12 @@ export default async function handler(
 	}
 
 	if (req.method === "GET") {
-        const { name, id } = req.query;
-    
+		const { name, id } = req.query;
 
 		// Usage example
 		const webpageURL = `https://jobs.lever.co/${name}/${id}`;
-		const elementSelector = ".section-wrapper .section:nth-child(3) ul"; // CSS selector of the HTML element you want to scrape
+
+		const elementSelector = "[data-qa='job-description']"; // CSS selector of the HTML element you want to scrape
 		scrapeWebPage(webpageURL, elementSelector)
 			.then((content) => {
 				res.status(200).json({
