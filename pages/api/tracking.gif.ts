@@ -13,18 +13,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
       // Connect to the WebSocket server
-      const socket = new WebSocket("ws://instantapplywebsockett.onrender.com");
-
+      const socket = new WebSocket("wss://instantapplywebsockett.onrender.com");
+console.log("socket",socket)
       // Wait for the WebSocket connection to be established
-      await new Promise((resolve) => {
-        socket.on("open", resolve);
-      });
+       // Wait for the WebSocket connection to be established
+    socket.on('open', () => {
+      console.log('WebSocket connection established',message);
 
-      // Send the message to the WebSocket server
+      // Send a message to the WebSocket server
+
       socket.send(JSON.stringify(message));
+    });
 
-      // Return a success response
-      res.status(200).json({ success: true });
+     // Handle WebSocket messages received from the server
+     socket.on('message', (message) => {
+      console.log('Received message from WebSocket server:', message);
+
+      // Close the WebSocket connection
+      socket.close();
+    });
+
+    // Handle WebSocket connection close
+    socket.on('close', () => {
+      console.log('WebSocket connection closed');
+
+    });
+    // Return a success response
+    res.status(200).json({ success: true });
     } catch (error) {
       // Handle errors
       console.error("Error sending notification:", error);
