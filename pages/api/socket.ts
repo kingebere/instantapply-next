@@ -21,6 +21,7 @@ wss.on("connection", (ws) => {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     // Upgrade the HTTP request to a WebSocket connection
+    console.log(req,"req")
     wss.handleUpgrade(req, req.socket, Buffer.alloc(0), (ws) => {
       wss.emit("connection", ws);
     });
