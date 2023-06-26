@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
       // Connect to the WebSocket server
-      const socket = new WebSocket("wss://instantapply.co/api/socket");
+      const socket = new WebSocket("ws://instantapplywebsockett.onrender.com");
 
       // Wait for the WebSocket connection to be established
       await new Promise((resolve) => {
