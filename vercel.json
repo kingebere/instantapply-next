@@ -1,0 +1,9 @@
+{
+    "build": {
+      "timeout": 60
+    },
+    "functions":{
+        "timeout": 60
+    }
+  }
+  
