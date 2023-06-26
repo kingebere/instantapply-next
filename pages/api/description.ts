@@ -45,10 +45,11 @@ export default async function handler(
 	}
 
 	if (req.method === "GET") {
-		const company = "metabase";
-		const id = "5bf3233d-a162-47b2-8d85-d3650b176c6e";
+        const { name, id } = req.query;
+    
+
 		// Usage example
-		const webpageURL = `https://jobs.lever.co/${company}/${id}`;
+		const webpageURL = `https://jobs.lever.co/${name}/${id}`;
 		const elementSelector = ".section-wrapper .section:nth-child(3) ul"; // CSS selector of the HTML element you want to scrape
 		scrapeWebPage(webpageURL, elementSelector)
 			.then((content) => {
