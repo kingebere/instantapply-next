@@ -1,0 +1,65 @@
+import { NextApiRequest, NextApiResponse } from "next";
+import { supabase } from "../../supabase";
+import {
+	getChatGPTResponse,
+	parsePDFBYURL,
+	scrapeWebPage,
+} from "@/lib/helpers";
+
+export default async function handler(
+	req: NextApiRequest,
+	res: NextApiResponse
+) {
+	const allowedOrigin = [
+		"https://jobs.lever.co",
+		"https://boards.greenhouse.io",
+		"https://jobs.ashbyhq.com",
+		"https://mail.google.com",
+		"https://*.bamboohr.com",
+		"https://*.bamboohr.co.uk",
+	];
+
+	//since Access-Control-Allow-Origin doesnt allow multiple value , we
+	//make a checker that adds the allowed url based on the headers.origin
+	if (allowedOrigin.includes(req.headers.origin as string)) {
+		res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
+	}
+	res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+
+	// Handle preflight requests
+	if (req.method === "OPTIONS") {
+		if (allowedOrigin.includes(req.headers.origin as string)) {
+			res.setHeader(
+				"Access-Control-Allow-Origin",
+				req.headers.origin as string
+			);
+		}
+		res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+		res.setHeader(
+			"Access-Control-Allow-Headers",
+			"Authorization, Content-Type"
+		);
+		res.status(200).end();
+		return;
+	}
+
+	if (req.method === "GET") {
+		const company = "metabase";
+		const id = "5bf3233d-a162-47b2-8d85-d3650b176c6e";
+		// Usage example
+		const webpageURL = `https://jobs.lever.co/${company}/${id}`;
+		const elementSelector = ".section-wrapper .section:nth-child(3) ul"; // CSS selector of the HTML element you want to scrape
+		scrapeWebPage(webpageURL, elementSelector)
+			.then((content) => {
+				res.status(200).json({
+					jobRequirement: content,
+				});
+				// Use the scraped content as needed
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+				// Handle the error
+			});
+	}
+}
