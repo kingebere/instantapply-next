@@ -25,12 +25,12 @@ console.log("origin",req.headers.origin)
 
   // Handle preflight requests
   if (req.method === "OPTIONS") {
-    if (allowedOrigin.includes(req.headers.origin as string)) {
+
       res.setHeader(
         "Access-Control-Allow-Origin",
         req.headers.origin as string
       );
-    }
+    
     res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
     res.setHeader(
       "Access-Control-Allow-Headers",
