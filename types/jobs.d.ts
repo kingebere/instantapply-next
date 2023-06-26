@@ -1,4 +1,4 @@
 interface JobDescritption {
-	jobRequirements: string;
-	jobTitle: string;
+  jobRequirements: string;
+  jobTitle: string;
 }

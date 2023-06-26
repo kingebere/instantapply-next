@@ -13,6 +13,7 @@ export default async function handler(
     "https://mail.google.com",
     "https://*.bamboohr.com",
     "https://*.bamboohr.co.uk",
+    "https://api.openai.com",
   ];
 
   //since Access-Control-Allow-Origin doesnt allow multiple value , we
@@ -40,49 +41,46 @@ export default async function handler(
     return;
   }
 
+  if (req.method === "POST") {
+    const { session, jobDescription } = req.body;
+    const {
+      data: {
+        session: { user },
+      },
+    } = JSON.parse(session);
 
-    
-    if (req.method === "POST") {
-      const { session, jobDescription } = req.body;
-      const {
-        data: {
-          session: { user },
-        },
-      } = JSON.parse(session);
+    try {
+      const { data, error } = await supabase
+        .from("profile")
+        .select("resume_url")
+        .eq("id", user.id);
+      if (error) throw error;
 
-      try {
-        const { data, error } = await supabase
-          .from("profile")
-          .select("resume_url")
-          .eq("id", user.id);
-        if (error) throw error;
+      const { resume_url } = data[0];
+      if (resume_url) {
+        //parse the user resume
+        const pdfText = await parsePDFBYURL(resume_url);
 
-        const { resume_url } = data[0];
-        if (resume_url) {
-
-          //parse the user resume
-          const pdfText = await parsePDFBYURL(resume_url);
-    
-          //get a tailored response for the resume and job description 
-          if (jobDescription && pdfText) {
-            const chatGPTresponse = await getChatGPTResponse(
-              jobDescription,
-              pdfText
-            );
-            if (chatGPTresponse) {
-              res.status(200).json({
-                message: chatGPTresponse,
-              });
-            } else {
-              res.status(404).json({ message: "not found" });
-            }
+        //get a tailored response for the resume and job description
+        if (jobDescription && pdfText) {
+          const chatGPTresponse = await getChatGPTResponse(
+            jobDescription,
+            pdfText
+          );
+          if (chatGPTresponse) {
+            res.status(200).json({
+              message: chatGPTresponse,
+            });
+          } else {
+            res.status(404).json({ message: "not found" });
           }
         }
-      } catch (e) {
-        console.error(e);
-        res.status(500).json({
-          message: "internal server error",
-        });
       }
+    } catch (e) {
+      console.error(e);
+      res.status(500).json({
+        message: "internal server error",
+      });
+    }
   }
 }
