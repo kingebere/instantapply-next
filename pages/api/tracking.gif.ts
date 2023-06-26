@@ -14,8 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       // Connect to the WebSocket server
       const socket = new WebSocket("wss://instantapplywebsockett.onrender.com");
-console.log("socket",socket)
-      // Wait for the WebSocket connection to be established
+
        // Wait for the WebSocket connection to be established
     socket.on('open', () => {
       console.log('WebSocket connection established',message);

@@ -6,23 +6,22 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	const allowedOrigin = [
-		"https://jobs.lever.co",
-		"https://boards.greenhouse.io",
-		"https://jobs.ashbyhq.com",
-		"https://mail.google.com",
-		"https://*.bamboohr.com",
-		"https://*.bamboohr.co.uk",
-	];
-	console.log("origin", req.headers.origin);
-	//since Access-Control-Allow-Origin doesnt allow multiple value , we
-	//make a checker that adds the allowed url based on the headers.origin
+  const allowedOrigin = [
+    "https://jobs.lever.co",
+    "https://boards.greenhouse.io",
+    "https://jobs.ashbyhq.com",
+    "https://mail.google.com",
+    "https://*.bamboohr.com",
+    "https://*.bamboohr.co.uk",
+  ];
 
-	res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
-
-	res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-	res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
-
+  //since Access-Control-Allow-Origin doesnt allow multiple value , we
+  //make a checker that adds the allowed url based on the headers.origin
+  if (allowedOrigin.includes(req.headers.origin as string)) {
+    res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
+  }
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
 	// Handle preflight requests
 	if (req.method === "OPTIONS") {
 		res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
