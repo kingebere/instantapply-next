@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import WebSocket from "ws";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === "GET") {
     const { email } = req.query;
 
@@ -15,32 +18,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const socket = new WebSocket("wss://instantapplywebsockett.onrender.com");
 
       // Wait for the WebSocket connection to be established
-      socket.on('open', () => {
-        console.log('WebSocket connection established', message);
+      socket.on("open", () => {
+        console.log("WebSocket connection established", message);
 
         // Send a message to the WebSocket server
         socket.send(JSON.stringify(message));
       });
 
       // Handle WebSocket messages received from the server
-      socket.on('message', (message) => {
-        console.log('Received message from WebSocket server:', message);
+      socket.on("message", (message) => {
+        console.log("Received message from WebSocket server:", message);
 
         // Close the WebSocket connection
         socket.close();
       });
 
       // Handle WebSocket connection close
-      socket.on('close', () => {
-        console.log('WebSocket connection closed');
+      socket.on("close", () => {
+        console.log("WebSocket connection closed");
 
         // Retry connection after a delay
         setTimeout(connectWebSocket, 5000); // Retry after 5 seconds
       });
 
       // Handle WebSocket errors
-      socket.on('error', (error) => {
-        console.error('WebSocket error:', error);
+      socket.on("error", (error) => {
+        console.error("WebSocket error:", error);
 
         // Close the WebSocket connection and retry after a delay
         socket.close();

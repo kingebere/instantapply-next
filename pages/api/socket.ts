@@ -18,24 +18,27 @@ wss.on("connection", (ws) => {
   });
 });
 
-export default async function handler(req:NextApiRequest, res:NextApiResponse) {
-    if (req.method === 'GET') {
-      // Check if the 'upgrade' header is present
-      const upgradeHeader = req.headers.upgrade || '';
-      const isWebSocketUpgrade = upgradeHeader.toLowerCase() === 'websocket';
-  
-      if (!isWebSocketUpgrade) {
-        res.setHeader('Allow', 'GET');
-        res.status(405).end('Method Not Allowed');
-        return;
-      }
-  
-      // Upgrade the HTTP request to a WebSocket connection
-      wss.handleUpgrade(req, req.socket, Buffer.alloc(0), (ws) => {
-        wss.emit('connection', ws);
-      });
-    } else {
-      res.setHeader('Allow', 'GET');
-      res.status(405).end('Method Not Allowed');
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method === "GET") {
+    // Check if the 'upgrade' header is present
+    const upgradeHeader = req.headers.upgrade || "";
+    const isWebSocketUpgrade = upgradeHeader.toLowerCase() === "websocket";
+
+    if (!isWebSocketUpgrade) {
+      res.setHeader("Allow", "GET");
+      res.status(405).end("Method Not Allowed");
+      return;
     }
+
+    // Upgrade the HTTP request to a WebSocket connection
+    wss.handleUpgrade(req, req.socket, Buffer.alloc(0), (ws) => {
+      wss.emit("connection", ws);
+    });
+  } else {
+    res.setHeader("Allow", "GET");
+    res.status(405).end("Method Not Allowed");
   }
+}
