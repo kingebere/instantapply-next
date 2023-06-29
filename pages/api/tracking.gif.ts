@@ -1,15 +1,69 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import WebSocket from "ws";
+import { SendEmailCommand } from "@aws-sdk/client-ses";
+import { sesClient } from "../../lib/sesClient";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+
+
   if (req.method === "GET") {
     const { email } = req.query;
+    const { sender } = req.query;
+    const {id}=req.query
+const count = 1
 
-    // Perform tracking logic here, such as recording the email open event
+     //trigger email to the sender 
+     const createSendEmailCommand = (toAddress: string , fromAddress: string) => {
+      return new SendEmailCommand({
+        Destination: {
+          CcAddresses: [],
+          ToAddresses: [
+            toAddress,
+          ],
+        },
+        Message: {
+          Body: {
+            Html: {
+              Charset: "UTF-8",
+              Data: `Your email to ${email} has been opened {count} time${count>1?`s`:``}`,
+            },
+            Text: {
+              Charset: "UTF-8",
+              Data: "TEXT_FORMAT_BODY",
+            },
+          },
+          Subject: {
+            Charset: "UTF-8",
+            Data: "Mail track-InstantApply",
+          },
+        },
+        Source: fromAddress,
+        ReplyToAddresses: [],
+      });
+    };
+  
+    try {
+      const sendEmailCommand = createSendEmailCommand(
+      
+        sender as string , "design@uiland.design"
+      );
+  
+      const result = await sesClient.send(sendEmailCommand);
+      console.log("Email sent successfully:", result);
+  
+      res.status(200).json({ message: "Email sent successfully" });
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      res.status(500).json({ error: "Failed to send email" });
+    }
+    // Perform tracking logic here, such as recording the email open event to dB
     console.log(email, "works");
+
+   
 
     // Send a message to the WebSocket server
     const message = { email: email, count: 1 };
