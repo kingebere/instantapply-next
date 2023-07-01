@@ -76,3 +76,12 @@ export async function getUserProfile(user: any) {
 
   return data;
 }
+export async function getUserPdf(user_id: any) {
+  if (!user_id) return;
+  const { data, error } = await supabase
+    .from("profile")
+    .select("resume_url")
+    .eq("id", user_id);
+
+  return data;
+}
