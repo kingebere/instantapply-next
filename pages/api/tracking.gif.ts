@@ -4,6 +4,7 @@ import WebSocket from "ws";
 import { sesClient } from "../../lib/sesClient";
 import { createSendEmailCommand } from "@/lib/helpers";
 import { supabase } from "@/supabase";
+import ip from 'ip';
 
 export default async function handler(
 	req: NextApiRequest,
@@ -12,12 +13,12 @@ export default async function handler(
 
 
 	if (req.method === "GET") {
-		const { email, jobId, userStatus,ip } = req.query;
- console.log(ip)
+		const { email, jobId, userStatus,userIp } = req.query;
+ console.log(userIp)
 		try {
 			
-		
-			if (jobId && userStatus !== "sender") {
+      const ipAddress = ip.address();
+			if (jobId && userStatus !== "sender" && ipAddress!==userIp ) {
 	
 				//find the job
 				const { data, error } = await supabase
