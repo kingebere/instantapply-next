@@ -71,6 +71,7 @@ export default async function handler(
 		res.setHeader('Expires', '0');
 		res.setHeader('Surrogate-Control', 'no-store');
 		res.setHeader("Content-Type", "image/gif");
+
 		res.send(pixelImage);
 	} else {
 		res.status(405).json({ error: "Method not allowed" });
