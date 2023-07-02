@@ -1,6 +1,7 @@
 import axios from "axios";
 import pdf from "pdf-parse";
 import cheerio from "cheerio";
+import { SendEmailCommand } from "@aws-sdk/client-ses";
 
 //function for asking chat GPT questions
 export async function askQuestion(question: string) {
@@ -92,3 +93,34 @@ export const scrapeWebPage = async (url: string, elementSelector: string) => {
     return null;
   }
 };
+
+    //trigger email to the sender 
+    export const createSendEmailCommand = (toAddress: string , fromAddress: string,email:string) => {
+      return new SendEmailCommand({
+        Destination: {
+          CcAddresses: [],
+          ToAddresses: [
+            toAddress,
+          ],
+        },
+        Message: {
+          Body: {
+            Html: {
+              Charset: "UTF-8",
+              Data: `Your email to ${email} has been opened`,
+            },
+            Text: {
+              Charset: "UTF-8",
+              Data: "TEXT_FORMAT_BODY",
+            },
+          },
+          Subject: {
+            Charset: "UTF-8",
+            Data: "Mail track-InstantApply",
+          },
+        },
+        Source: fromAddress,
+        ReplyToAddresses: [],
+      });
+    };
+  

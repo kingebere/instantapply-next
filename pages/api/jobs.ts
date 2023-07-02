@@ -9,65 +9,63 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	if (req.method === "GET") {
-		const { email, jobId, userStatus } = req.query;
+	const allowedOrigin = [
+		"https://jobs.lever.co",
+		"https://boards.greenhouse.io",
+		"https://jobs.ashbyhq.com",
+		"https://mail.google.com",
+		"https://*.bamboohr.com",
+		"https://*.bamboohr.co.uk",
+	];
 
+	//since Access-Control-Allow-Origin doesnt allow multiple value , we
+	//make a checker that adds the allowed url based on the headers.origin
+	if (allowedOrigin.includes(req.headers.origin as string)) {
+		res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
+	}
+	res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+	// Handle preflight requests
+	if (req.method === "OPTIONS") {
+		res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
+
+		res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+		res.setHeader(
+			"Access-Control-Allow-Headers",
+			"Authorization, Content-Type"
+		);
+		res.status(200).end();
+		return;
+	}
+	if (req.method === "POST") {
+		const { jobDescription, session } = req.body;
+		const {
+			data: {
+				session: { user },
+			},
+		} = JSON.parse(session);
+//job description
+		const emailData = {
+			...jobDescription,
+			user_id: user?.id,
+		};
 		try {
-			
-		
-			if (jobId && userStatus === "receiver") {
-	
-				//find the job
+			// get a tailored response for the resume and job description
+			if (jobDescription) {
 				const { data, error } = await supabase
 					.from("jobviews")
-					.select("*")
-					.eq("job_id", jobId);
-
+					.insert(emailData);
 				if (error) throw error;
-
-				if (!data[0]) console.log("no data found");
-
-				//fecth the view count value for that job
-				const viewCount = data[0]?.count;
-
-				//if the count value is less that 0 send the message and update the count
-				if (viewCount < 0) {
-					const sendEmailCommand = createSendEmailCommand(
-						"adeizam01@gmail.com",
-						"design@uiland.design",
-						email as string
-					);
-					const result = await sesClient.send(sendEmailCommand);
-					console.log('email sent')
-				}
-      
-
-				//update the count
-				const { data: countData, error: countError } = await supabase.rpc(
-					"submit",
-					{
-						job_id: jobId,
-						increment_num: 1,
-					}
-				);
-
-				if (countError) {
-					throw countError;
-				}
+				res.status(200).json({ message: "ok" });
+			} else {
+				res.status(400).json({ message: "Bad request" });
 			}
+		} catch (e) {
+			console.error(e);
+			res.status(500).json({
+				message: "internal server error",
+			});
 		}
-		catch(error) { 
-			console.error(error);
-		}
-		//for both cases send the buffer image
-		const pixelImage = Buffer.from(
-			"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
-			"base64"
-		);
-		res.setHeader("Content-Type", "image/gif");
-		res.send(pixelImage);
-	} else {
-		res.status(405).json({ error: "Method not allowed" });
 	}
 }
 
