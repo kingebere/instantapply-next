@@ -13,7 +13,7 @@ export default async function handler(
 		const { email, jobId, userStatus } = req.query;
 
 		try {
-			if (jobId && userStatus === "receiver") {
+			if (jobId && userStatus === "sender") {
 				//find the job
 				const { data, error } = await supabase
 					.from("jobviews")
@@ -59,7 +59,7 @@ export default async function handler(
 			"base64"
 		);
 		res.setHeader("Content-Type", "image/gif");
-    
+
 		res.send(pixelImage);
 	} else {
 		res.status(405).json({ error: "Method not allowed" });
