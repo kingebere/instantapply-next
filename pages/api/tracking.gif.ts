@@ -13,10 +13,7 @@ export default async function handler(
 		const { email, jobId, userStatus } = req.query;
 
 		try {
-			
-		
-			if (jobId && userStatus !== "sender") {
-	
+			if (jobId && userStatus == "sender") {
 				//find the job
 				const { data, error } = await supabase
 					.from("jobviews")
@@ -29,24 +26,21 @@ export default async function handler(
 
 				//fecth the view count value for that job
 				const viewCount = data[0]?.count;
-
+				console.log("view count: " , viewCount,typeof viewCount )
 				//if the count value is less that 0 send the message and update the count
-				if (viewCount < 0) {
+				if (viewCount <= 0) {
+					console.log("email sent");
 					const sendEmailCommand = createSendEmailCommand(
 						"adeizam01@gmail.com",
 						"design@uiland.design",
 						email as string
 					);
 					const result = await sesClient.send(sendEmailCommand);
-								console.log('email sent')
+					console.log("email sent");
 				}
-      
-			
-	
-
 				//update the count
 				const { data: countData, error: countError } = await supabase.rpc(
-					"submit",
+					"update_views_count",
 					{
 						job_id: jobId,
 						increment_num: 1,
@@ -57,8 +51,7 @@ export default async function handler(
 					throw countError;
 				}
 			}
-		}
-		catch(error) { 
+		} catch (error) {
 			console.error(error);
 		}
 		//for both cases send the buffer image
@@ -66,10 +59,13 @@ export default async function handler(
 			"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
 			"base64"
 		);
-		res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-		res.setHeader('Pragma', 'no-cache');
-		res.setHeader('Expires', '0');
-		res.setHeader('Surrogate-Control', 'no-store');
+		res.setHeader(
+			"Cache-Control",
+			"no-store, no-cache, must-revalidate, proxy-revalidate"
+		);
+		res.setHeader("Pragma", "no-cache");
+		res.setHeader("Expires", "0");
+		res.setHeader("Surrogate-Control", "no-store");
 		res.setHeader("Content-Type", "image/gif");
 
 		res.send(pixelImage);
