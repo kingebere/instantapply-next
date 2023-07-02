@@ -13,10 +13,7 @@ export default async function handler(
 		const { email, jobId, userStatus } = req.query;
 
 		try {
-			
-		
 			if (jobId && userStatus === "receiver") {
-	
 				//find the job
 				const { data, error } = await supabase
 					.from("jobviews")
@@ -38,25 +35,22 @@ export default async function handler(
 						email as string
 					);
 					const result = await sesClient.send(sendEmailCommand);
-					console.log('email sent')
-				}
-      
+					console.log("email sent");
+					//update the count
+					const { data: countData, error: countError } = await supabase.rpc(
+						"submit",
+						{
+							job_id: jobId,
+							increment_num: 1,
+						}
+					);
 
-				//update the count
-				const { data: countData, error: countError } = await supabase.rpc(
-					"submit",
-					{
-						job_id: jobId,
-						increment_num: 1,
+					if (countError) {
+						throw countError;
 					}
-				);
-
-				if (countError) {
-					throw countError;
 				}
 			}
-		}
-		catch(error) { 
+		} catch (error) {
 			console.error(error);
 		}
 		//for both cases send the buffer image
