@@ -20,8 +20,8 @@ export default async function handler(
       const ipAddress = ip.address();
        console.log(userIp,"gmailip")
  console.log(ipAddress,"endpointip")
-			if (jobId && userStatus !== "sender" && ipAddress!==userIp ) {
-	
+			if (jobId  && ipAddress!==userIp ) {
+        // if (jobId && userStatus !== "sender" && ipAddress!==userIp ) {
 				//find the job
 				const { data, error } = await supabase
 					.from("jobviews")
