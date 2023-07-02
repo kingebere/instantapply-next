@@ -16,8 +16,10 @@ export default async function handler(
 		const { email, jobId, userStatus,userIp } = req.query;
 
 		try {
-			
-      const ipAddress = ip.address();
+      let forwarded = req.headers['x-forwarded-for'];
+      let ipAddress = forwarded ? String(forwarded).split(/, /)[0] : "";
+      
+   
        console.log(userIp,"gmailip")
  console.log(ipAddress,"endpointip")
 			if (jobId  && ipAddress!==userIp ) {

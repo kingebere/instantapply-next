@@ -31,7 +31,9 @@ export default async function handler(	req: NextApiRequest,
             res.status(200).end();
             return;
           }
-    const ipAddress = ip.address();	
+          let forwarded = req.headers['x-forwarded-for'];
+          console.log(forwarded)
+          let ipAddress = forwarded ? String(forwarded).split(/, /)[0] : "";
 	console.log(ipAddress);
 	res.status(200).send(ipAddress);
 }
