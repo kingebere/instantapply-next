@@ -14,10 +14,12 @@ export default async function handler(
 
 	if (req.method === "GET") {
 		const { email, jobId, userStatus,userIp } = req.query;
- console.log(userIp)
+
 		try {
 			
       const ipAddress = ip.address();
+       console.log(userIp,"gmailip")
+ console.log(ipAddress,"endpointip")
 			if (jobId && userStatus !== "sender" && ipAddress!==userIp ) {
 	
 				//find the job
