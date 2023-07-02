@@ -44,7 +44,7 @@ export default async function handler(
 				session: { user },
 			},
 		} = JSON.parse(session);
-
+//job description
 		const emailData = {
 			...jobDescription,
 			user_id: user?.id,
