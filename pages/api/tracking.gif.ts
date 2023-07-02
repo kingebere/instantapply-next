@@ -9,9 +9,11 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	if (req.method === "GET") {
-		const { email, jobId, userStatus } = req.query;
 
+
+	if (req.method === "GET") {
+		const { email, jobId, userStatus,ip } = req.query;
+ console.log(ip)
 		try {
 			
 		
