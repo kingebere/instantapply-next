@@ -17,7 +17,7 @@ export default async function handler(
     "https://mail.google.com",
     "https://*.bamboohr.com",
     "https://*.bamboohr.co.uk",
-    "https://api.openai.com",
+    "https://ai.openai.com",
   ];
 
   //since Access-Control-Allow-Origin doesnt allow multiple value , we

@@ -8,7 +8,7 @@ export async function askQuestion(question: string) {
   console.log(process.env.NEXT_PUBLIC_OPENAI_KEY);
   try {
     const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
+      "https://ai.openai.com/v1/chat/completions",
       {
         model: "gpt-3.5-turbo",
         messages: [
