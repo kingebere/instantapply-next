@@ -65,6 +65,7 @@ export default async function handler(
 			"base64"
 		);
 		res.setHeader("Content-Type", "image/gif");
+    
 		res.send(pixelImage);
 	} else {
 		res.status(405).json({ error: "Method not allowed" });
