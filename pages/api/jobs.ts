@@ -33,7 +33,7 @@ export default async function handler(
 		res.setHeader(
 			"Access-Control-Allow-Headers",
 			"Authorization, Content-Type"
-		);
+		)
 		res.status(200).end();
 		return;
 	}

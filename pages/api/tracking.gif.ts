@@ -1,52 +1,42 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import WebSocket from "ws";
+import { serialize, parse } from "cookie";
 
 import { sesClient } from "../../lib/sesClient";
 import { createSendEmailCommand } from "@/lib/helpers";
 import { supabase } from "@/supabase";
-import ip from 'ip';
+import ip from "ip";
 
 export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-
-
 	if (req.method === "GET") {
-		const { email, jobId, userStatus,userIp } = req.query;
+		const { email, jobId,senderEmail } = req.query;
 
 		try {
-      let forwarded = req.headers['x-forwarded-for'];
-      let ipAddress = forwarded ? String(forwarded).split(/, /)[0] : "";
-      
-   
-       console.log(userIp,"gmailip")
- console.log(ipAddress,"endpointip")
-			if (jobId  && ipAddress!==userIp ) {
-        // if (jobId && userStatus !== "sender" && ipAddress!==userIp ) {
+			//only want this to happen if the user is the receiver
+			if (jobId) {
 				//find the job
 				const { data, error } = await supabase
 					.from("jobviews")
 					.select("*")
 					.eq("job_id", jobId);
-
 				if (error) throw error;
-
-				if (!data[0]) console.log("no data found");
-
+				if (!data[0]) {
+					return res.status(404).json({ message: "not found" });
+				}
 				//fecth the view count value for that job
 				const viewCount = data[0]?.count;
-				console.log("view count: " , viewCount,typeof viewCount )
 				//if the count value is less that 0 send the message and update the count
 				if (viewCount <= 0) {
-					console.log("email sent");
 					const sendEmailCommand = createSendEmailCommand(
-						"adeizam01@gmail.com",
+						senderEmail as string,
 						"design@uiland.design",
 						email as string
 					);
 					const result = await sesClient.send(sendEmailCommand);
-					console.log("email sent");
+
 				}
 				//update the count
 				const { data: countData, error: countError } = await supabase.rpc(
