@@ -2,12 +2,16 @@ import { NextApiRequest, NextApiResponse } from "next";
 var crypto = require('crypto');
 
 // Decryption function
-function decrypt(encryptedText: string | string[] | undefined, secretKey: string) {
-  const decipher = crypto.createDecipher('aes-256-cbc', secretKey);
-  let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
-  decrypted += decipher.final('utf8');
-  return decrypted;
-}
+function decrypt(encryptedText: string | string[] | undefined, secretKey: any) {
+    const algorithm = 'aes-256-cbc';
+    const key = crypto.createHash('sha256').update(secretKey).digest();
+    const iv = Buffer.alloc(16, 0); // Use a proper initialization vector (IV) for security
+  
+    const decipher = crypto.createDecipheriv(algorithm, key, iv);
+    let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
+  }
      // Function to generate a 256-bit key from a password (you can use a better key derivation function in production)
      function generateKey(password: string) {
         return crypto
@@ -22,6 +26,7 @@ export default async function handler(
 ) {
   try {
     const { id } = req.query;
+    console.log("id",id)
 
     // Increment the count or perform any tracking logic here
 
