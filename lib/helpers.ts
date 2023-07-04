@@ -94,33 +94,34 @@ export const scrapeWebPage = async (url: string, elementSelector: string) => {
   }
 };
 
-    //trigger email to the sender 
-    export const createSendEmailCommand = (toAddress: string , fromAddress: string,email:string) => {
-      return new SendEmailCommand({
-        Destination: {
-          CcAddresses: [],
-          ToAddresses: [
-            toAddress,
-          ],
+//trigger email to the sender
+export const createSendEmailCommand = (
+  toAddress: string,
+  fromAddress: string,
+  email: string
+) => {
+  return new SendEmailCommand({
+    Destination: {
+      CcAddresses: [],
+      ToAddresses: [toAddress],
+    },
+    Message: {
+      Body: {
+        Html: {
+          Charset: "UTF-8",
+          Data: `Your email to ${email} has been opened`,
         },
-        Message: {
-          Body: {
-            Html: {
-              Charset: "UTF-8",
-              Data: `Your email to ${email} has been opened`,
-            },
-            Text: {
-              Charset: "UTF-8",
-              Data: "TEXT_FORMAT_BODY",
-            },
-          },
-          Subject: {
-            Charset: "UTF-8",
-            Data: "Mail track-InstantApply",
-          },
+        Text: {
+          Charset: "UTF-8",
+          Data: "TEXT_FORMAT_BODY",
         },
-        Source: fromAddress,
-        ReplyToAddresses: [],
-      });
-    };
-  
+      },
+      Subject: {
+        Charset: "UTF-8",
+        Data: "Mail track-InstantApply",
+      },
+    },
+    Source: fromAddress,
+    ReplyToAddresses: [],
+  });
+};
