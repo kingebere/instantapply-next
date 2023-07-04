@@ -50,8 +50,16 @@ export default async function handler(
       }
     const {match} =req.body
 console.log("match",match)
-    const encryptedText = encrypt(match, secretKey);
-console.log('Encrypted:', encryptedText);
-res.status(200).send(encryptedText)
+const algorithm = 'aes-256-cbc';
+const password = 'Instant';
+const key = crypto.scryptSync(password, 'salt', 32);
+const iv = Buffer.alloc(16, 0);
+
+const cipher = crypto.createCipheriv(algorithm, key, iv);
+let encrypted = cipher.update(match, 'utf8', 'hex');
+encrypted += cipher.final('hex');
+console.log(encrypted); // outputs the encrypted data
+console.log('Encrypted:', encrypted);
+res.status(200).send(encrypted)
 
 }

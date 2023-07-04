@@ -43,13 +43,19 @@ export default async function handler(
     console.log("IP Address:", ipAddress);
     console.log("Location:", location);
 
+    const algorithm = 'aes-256-cbc';
+const password = 'Instant';
+const key = crypto.scryptSync(password, 'salt', 32);
+const iv = Buffer.alloc(16, 0);
 
 
-    const decryptedText = decrypt(id, secretKey);
-    console.log("Decrypted:", decryptedText);
+    const decipher = crypto.createDecipheriv(algorithm, key, iv);
+    let decrypted = decipher.update(id, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    console.log(decrypted); // outputs the decrypted data
 
     // Redirect to the original URL
-    res.writeHead(302, { Location: decryptedText });
+    res.writeHead(302, { Location: decrypted });
     res.end();
   } catch (error) {
     console.error("Error:", error);
