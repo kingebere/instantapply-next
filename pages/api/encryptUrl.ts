@@ -8,7 +8,14 @@ function encrypt(text: any, secretKey: any) {
     encrypted += cipher.final('hex');
     return encrypted;
   }
-const secretKey="Instant"
+  // Function to generate a 256-bit key from a password (you can use a better key derivation function in production)
+function generateKey(password: string) {
+    return crypto
+      .createHash("sha256")
+      .update(password)
+      .digest();
+  }
+  const secretKey = generateKey("Instant");
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

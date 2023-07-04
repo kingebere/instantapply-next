@@ -8,7 +8,14 @@ function decrypt(encryptedText: string | string[] | undefined, secretKey: string
   decrypted += decipher.final('utf8');
   return decrypted;
 }
-
+     // Function to generate a 256-bit key from a password (you can use a better key derivation function in production)
+     function generateKey(password: string) {
+        return crypto
+          .createHash("sha256")
+          .update(password)
+          .digest();
+      }
+      const secretKey = generateKey("Instant"); // Replace with your own secret key
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -31,7 +38,7 @@ export default async function handler(
     console.log("IP Address:", ipAddress);
     console.log("Location:", location);
 
-    const secretKey = "Instant"; // Replace with your own secret key
+
 
     const decryptedText = decrypt(id, secretKey);
     console.log("Decrypted:", decryptedText);
