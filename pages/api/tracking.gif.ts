@@ -27,11 +27,12 @@ export default async function handler(
 				if (!data[0]) {
 					return res.status(404).json({ message: "not found" });
 				}
+	
 				//fecth the view count value for that job
-				const viewCount = data[0]?.count;
-
+				const viewCount = data[0]?.viewscount;
 				//if the count value is less that 0 send the message and update the count
 				if (viewCount <= 0) {
+				
 					const sendEmailCommand = createSendEmailCommand(
 						senderEmail as string,
 						"design@uiland.design",
