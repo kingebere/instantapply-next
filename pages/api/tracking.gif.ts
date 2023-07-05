@@ -8,75 +8,71 @@ import { supabase } from "@/supabase";
 import ip from "ip";
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+	req: NextApiRequest,
+	res: NextApiResponse
 ) {
-  if (req.method === "GET") {
-    const { email, jobId, senderEmail } = req.query;
+	if (req.method === "GET") {
+		const { email, jobId:jobid, senderEmail } = req.query;
+		console.log(jobid);
 
+		try {
+			//only want this to happen if the user is the receiver
+			if (jobid) {
+				//find the job
+				const { data, error } = await supabase
+					.from("jobviews")
+					.select("*")
+					.eq("job_id", jobid);
+				if (error) throw error;
+				if (!data[0]) {
+					return res.status(404).json({ message: "not found" });
+				}
+				//fecth the view count value for that job
+				const viewCount = data[0]?.count;
 
-    try {
-      //only want this to happen if the user is the receiver
-      if (jobId) {
-        //find the job
-        const { data, error } = await supabase
-          .from("jobviews")
-          .select("*")
-          .eq("job_id", jobId);
-        if (error) throw error;
-        if (!data[0]) {
-          return res.status(404).json({ message: "not found" });
-        }
-        //fecth the view count value for that job
-        const viewCount = data[0]?.count;
+				//if the count value is less that 0 send the message and update the count
+				if (viewCount <= 0) {
+					const sendEmailCommand = createSendEmailCommand(
+						senderEmail as string,
+						"design@uiland.design",
+						email as string
+					);
+					const result = await sesClient.send(sendEmailCommand);
+				}
+				//update the count
+				const { data: countData, error: countError } = await supabase.rpc(
+					"update_views_count",
+					{
+						jobid: jobid,
+						increment: 1,
+					}
+				);
 
+				if (countError) {
+					throw countError;
+				}
+			}
+		} catch (error) {
+			console.error(error);
+		}
+		//for both cases send the buffer image
+		const pixelImage = Buffer.from(
+			"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+			"base64"
+		);
+		res.setHeader(
+			"Cache-Control",
+			"no-store, no-cache, must-revalidate, proxy-revalidate"
+		);
+		res.setHeader("Pragma", "no-cache");
+		res.setHeader("Expires", "0");
+		res.setHeader("Surrogate-Control", "no-store");
+		res.setHeader("Content-Type", "image/gif");
 
-
-
-        
-        //if the count value is less that 0 send the message and update the count
-        if (viewCount <= 0) {
-          const sendEmailCommand = createSendEmailCommand(
-            senderEmail as string,
-            "design@uiland.design",
-            email as string
-          );
-          const result = await sesClient.send(sendEmailCommand);
-        }
-        //update the count
-        const { data: countData, error: countError } = await supabase.rpc(
-          "update_views_count",
-          {
-            job_id: jobId,
-            increment_num: 1,
-          }
-        );
-
-        if (countError) {
-          throw countError;
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    //for both cases send the buffer image
-    const pixelImage = Buffer.from(
-      "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
-      "base64"
-    );
-    res.setHeader(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate"
-    );
-    res.setHeader("Pragma", "no-cache");
-    res.setHeader("Expires", "0");
-    res.setHeader("Surrogate-Control", "no-store");
-    res.setHeader("Content-Type", "image/gif");
-
-    res.send(pixelImage);
-  } else {
-    res.status(405).json({ error: "Method not allowed" });
-  }
+		res.send(pixelImage);
+	} else {
+		res.status(405).json({ error: "Method not allowed" });
+	}
 }
 
 // const { email } = req.query;
