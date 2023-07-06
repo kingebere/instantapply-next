@@ -36,9 +36,10 @@ export default async function handler(
     res.status(200).end();
     return;
   }
-  
 
-  let url = req.body.url || "https://www.google.com/search?q=site%3Alever.co+OR+site%3Aashbyhq.com+OR+site%3Agreenhouse.io+OR+site%3Abamboohr.com+OR+site%3Aworkable.com++remote+software+engineer+after%3A2023-04-01&rlz=1C1GCEU_enNG1018NG1018&biw=1504&bih=458&sxsrf=APwXEddBRiELvHrkgm55oICbaTnexXlSKw%3A1686824909787&ei=zeeKZKvXL4idhbIPmtuM2AQ&ved=0ahUKEwjr8a68iMX_AhWITkEAHZotA0s4jAEQ4dUDCA8&uact=5&oq=site%3Alever.co+OR+site%3Aashbyhq.com+OR+site%3Agreenhouse.io+OR+site%3Abamboohr.com+OR+site%3Aworkable.com++remote+software+engineer+after%3A2023-04-01&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQA0oECEEYAFAAWABgAGgAcAB4AIABAIgBAJIBAJgBAKABAQ&sclient=gws-wiz-serp"
+  let url =
+    req.body.url ||
+    "https://www.google.com/search?q=site%3Alever.co+OR+site%3Aashbyhq.com+OR+site%3Agreenhouse.io+OR+site%3Abamboohr.com+OR+site%3Aworkable.com++remote+software+engineer+after%3A2023-04-01&rlz=1C1GCEU_enNG1018NG1018&biw=1504&bih=458&sxsrf=APwXEddBRiELvHrkgm55oICbaTnexXlSKw%3A1686824909787&ei=zeeKZKvXL4idhbIPmtuM2AQ&ved=0ahUKEwjr8a68iMX_AhWITkEAHZotA0s4jAEQ4dUDCA8&uact=5&oq=site%3Alever.co+OR+site%3Aashbyhq.com+OR+site%3Agreenhouse.io+OR+site%3Abamboohr.com+OR+site%3Aworkable.com++remote+software+engineer+after%3A2023-04-01&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQA0oECEEYAFAAWABgAGgAcAB4AIABAIgBAJIBAJgBAKABAQ&sclient=gws-wiz-serp";
   const resp = await unirest
     .get(url)
     .headers({
@@ -56,7 +57,6 @@ export default async function handler(
       let timePosted: any = [];
       let jobDetails: any = [];
 
- 
       let pages: any = [];
       let pageNumber: any = [];
       $(".yuRUbf > a > h3").each((i: string | number, el: any) => {
@@ -109,7 +109,6 @@ export default async function handler(
         };
       }
 
-
-      res.status(200).json([organicResults, paginationDetails])
+      res.status(200).json([organicResults, paginationDetails]);
     });
 }

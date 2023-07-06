@@ -14,12 +14,12 @@ export default async function handler(
 
   //since Access-Control-Allow-Origin doesnt allow multiple value , we
   //make a checker that adds the allowed url based on the headers.origin
-  
+
   if (allowedOrigin.includes(req.headers.origin as string)) {
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
-  }else{
+  } else {
     //since Access-Control-Allow-Origin doesnt allow wildcards like https://*.bamboohr.com, we set its value to * for sites like bamboohr
-     res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", "*");
   }
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
