@@ -7,7 +7,7 @@ export default async function handler(
 	res: NextApiResponse
 ) {
 	try {
-		const { $: trackingID } = req.query;
+		const { t: trackingID } = req.query;
 
 		// Get the user's location based on the country code
 		const countryCode = req.headers["x-vercel-ip-country"];
