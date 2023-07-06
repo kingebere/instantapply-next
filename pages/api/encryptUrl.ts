@@ -1,5 +1,18 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { supabase } from "@/supabase";
+var shortUrl = require("node-url-shortener");
+
+function promisifiedUrlShortner(longUrl: string) {
+	return new Promise((resolve, reject) => {
+		try {
+			shortUrl.short(longUrl, function (err: any, url: any) {
+				resolve(url);
+			});
+		} catch (error) {
+			reject(error);
+		}
+	});
+}
 
 export default async function handler(
 	req: NextApiRequest,
@@ -55,7 +68,8 @@ export default async function handler(
 
 			if (error) res.status(400).json({ message: "bad request" });
 			if (data) {
-				res.status(200).send(data[0]?.id);
+				let shortenUrl;
+				const modifiedUrl = `https://labium.serveo.net/api/t?$=${data[0]?.id}`;
 			}
 		} catch (error) {
 			console.log(error);
