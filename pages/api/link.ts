@@ -17,7 +17,7 @@ export default async function handler(
 		const visitorData = {
 			country: country[0] && country[0].Name,
 			city,
-			link_id: trackingID,
+			linksid: trackingID,
 		};
 
 		// Increment the count or perform any tracking logic here
@@ -25,8 +25,8 @@ export default async function handler(
 			//get the originalURl
 			const { data, error } = await supabase
 				.from("superlinks")
-        .select("originalUrl")
-        .eq("identifier",trackingID);
+				.select("originalUrl")
+				.eq("identifier", trackingID);
 
 			if (error) throw error;
 
@@ -34,7 +34,7 @@ export default async function handler(
 
 			const { data: dataVisitor, error: visitorError } = await supabase
 				.from("visitorsdata")
-				.insert(visitorData);
+				.insert(visitorData) ;
 
 			if (visitorError) {
 				throw visitorError;
@@ -53,11 +53,8 @@ export default async function handler(
 				throw countError;
 			}
 
-	
-
 			if (data) {
-        const originalURl = data[0].originalUrl;
-        console.log(originalURl);
+				const originalURl = data[0].originalUrl;
 				res.writeHead(302, { Location: originalURl });
 				res.end();
 			}
