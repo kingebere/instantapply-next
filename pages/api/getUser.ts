@@ -10,14 +10,16 @@ export default async function handler(
     "https://boards.greenhouse.io",
     "https://jobs.ashbyhq.com",
     "https://mail.google.com",
-    "https://*.bamboohr.com",
-    "https://*.bamboohr.co.uk",
   ];
 
   //since Access-Control-Allow-Origin doesnt allow multiple value , we
   //make a checker that adds the allowed url based on the headers.origin
+  
   if (allowedOrigin.includes(req.headers.origin as string)) {
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
+  }else{
+    //since Access-Control-Allow-Origin doesnt allow wildcards like https://*.bamboohr.com, we set its value to * for sites like bamboohr
+     res.setHeader("Access-Control-Allow-Origin", "*");
   }
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
