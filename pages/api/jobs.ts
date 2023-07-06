@@ -40,7 +40,7 @@ export default async function handler(
 	if (req.method === "POST") {
 		const { jobDescription, session, urlToTrack } = req.body;
 
-		console.log(urlToTrack);
+
 		const {
 			data: {
 				session: { user },
@@ -52,6 +52,20 @@ export default async function handler(
 			user_id: user?.id,
 		};
 		try {
+			//save trackable url
+      if (urlToTrack) {
+        
+        //add all urls to db
+				urlToTrack.forEach(async (urlToTrackItems: any) => {
+					const { data, error } = await supabase
+						.from("superlinks")
+						.insert({...urlToTrackItems,user_id: user.id});
+					if (error) {
+						throw error;
+					}
+				});
+			}
+
 			// get a tailored response for the resume and job description
 			if (jobDescription) {
 				const { data, error } = await supabase

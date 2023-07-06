@@ -26,7 +26,7 @@ export default async function handler(
 			const { data, error } = await supabase
 				.from("superlinks")
         .select("originalUrl")
-        .eq("id",trackingID);
+        .eq("identifier",trackingID);
 
 			if (error) throw error;
 
