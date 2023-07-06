@@ -40,7 +40,6 @@ export default async function handler(
 	if (req.method === "POST") {
 		const { jobDescription, session, urlToTrack } = req.body;
 
-
 		const {
 			data: {
 				session: { user },
