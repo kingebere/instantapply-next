@@ -6,67 +6,83 @@ import { createSendEmailCommand } from "@/lib/helpers";
 import { supabase } from "@/supabase";
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+	req: NextApiRequest,
+	res: NextApiResponse
 ) {
-  const allowedOrigin = [
-    "https://jobs.lever.co",
-    "https://boards.greenhouse.io",
-    "https://jobs.ashbyhq.com",
-    "https://mail.google.com",
-    "https://*.bamboohr.com",
-    "https://*.bamboohr.co.uk",
-  ];
+	const allowedOrigin = [
+		"https://jobs.lever.co",
+		"https://boards.greenhouse.io",
+		"https://jobs.ashbyhq.com",
+		"https://mail.google.com",
+		"https://*.bamboohr.com",
+		"https://*.bamboohr.co.uk",
+	];
 
-  //since Access-Control-Allow-Origin doesnt allow multiple value , we
-  //make a checker that adds the allowed url based on the headers.origin
-  if (allowedOrigin.includes(req.headers.origin as string)) {
-    res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
-  }
-  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
-  // Handle preflight requests
-  if (req.method === "OPTIONS") {
-    res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
+	//since Access-Control-Allow-Origin doesnt allow multiple value , we
+	//make a checker that adds the allowed url based on the headers.origin
+	if (allowedOrigin.includes(req.headers.origin as string)) {
+		res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
+	}
+	res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+	// Handle preflight requests
+	if (req.method === "OPTIONS") {
+		res.setHeader("Access-Control-Allow-Origin", req.headers.origin as string);
 
-    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Authorization, Content-Type"
-    );
-    res.status(200).end();
-    return;
-  }
-  if (req.method === "POST") {
-    const { jobDescription, session } = req.body;
-    const {
-      data: {
-        session: { user },
-      },
-    } = JSON.parse(session);
-    //job description
-    const emailData = {
-      ...jobDescription,
-      user_id: user?.id,
-    };
-    try {
-      // get a tailored response for the resume and job description
-      if (jobDescription) {
-        const { data, error } = await supabase
-          .from("jobviews")
-          .insert(emailData);
-        if (error) throw error;
-        res.status(200).json({ message: "ok" });
-      } else {
-        res.status(400).json({ message: "Bad request" });
-      }
-    } catch (e) {
-      console.error(e);
-      res.status(500).json({
-        message: "internal server error",
-      });
-    }
-  }
+		res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+		res.setHeader(
+			"Access-Control-Allow-Headers",
+			"Authorization, Content-Type"
+		);
+		res.status(200).end();
+		return;
+	}
+	if (req.method === "POST") {
+		const { jobDescription, session, urlToTrack } = req.body;
+
+
+		const {
+			data: {
+				session: { user },
+			},
+		} = JSON.parse(session);
+		//job description
+		const emailData = {
+			...jobDescription,
+			user_id: user?.id,
+		};
+		try {
+			//save trackable url
+      if (urlToTrack) {
+        
+        //add all urls to db
+				urlToTrack.forEach(async (urlToTrackItems: any) => {
+					const { data, error } = await supabase
+						.from("superlinks")
+						.insert({...urlToTrackItems,user_id: user.id});
+					if (error) {
+						throw error;
+					}
+				});
+			}
+
+			// get a tailored response for the resume and job description
+			if (jobDescription) {
+				const { data, error } = await supabase
+					.from("jobviews")
+					.insert(emailData);
+				if (error) throw error;
+				res.status(200).json({ message: "ok" });
+			} else {
+				res.status(400).json({ message: "Bad request" });
+			}
+		} catch (e) {
+			console.error(e);
+			res.status(500).json({
+				message: "internal server error",
+			});
+		}
+	}
 }
 
 // const { email } = req.query;
