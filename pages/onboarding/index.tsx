@@ -29,6 +29,7 @@ interface FormDataInterface {
   disabilitystatus: string;
   veteranstatus: string;
   currentCompany: string;
+  gmailContent: string;
 }
 
 export default function Onboarding() {
@@ -48,13 +49,14 @@ export default function Onboarding() {
     disabilitystatus: "",
     veteranstatus: "",
     currentCompany: "",
+    gmailContent: "",
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [active, setActive] = useState<number>(1);
   const [uploadProgress, setUploadProgress] = useState<number>(1);
   const [uploadPdfProgress, setUploadPdfProgress] = useState<number>(0);
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState<string>("");
-  const [stepperTitle,setStepperTitle]= useState<string>("Add Profile")
+  const [stepperTitle, setStepperTitle] = useState<string>("Add Profile");
   const areAllValuesFilled = (obj: Record<string, any>) => {
     // Iterate over each key in the object
     for (const key in obj) {
@@ -74,6 +76,20 @@ export default function Onboarding() {
   useEffect(() => {
     setIsButtonDisabled(areAllValuesFilled(formData));
   }, [formData]);
+
+  const textAreaFields = [
+    {
+      label: "Your gmailContent",
+
+      name: "gmailContent",
+      id: "gmailContent",
+      value: formData.gmailContent,
+      onChange: updateName,
+      placeholder: "put your content here",
+      required: true,
+      step: 2,
+    },
+  ];
 
   const inputFields = [
     {
@@ -337,7 +353,9 @@ export default function Onboarding() {
 
   //add input values to the formdata state
   function updateName(
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) {
     const fieldName = event.target.name;
     setFormData((prev) => ({
@@ -366,6 +384,7 @@ export default function Onboarding() {
           active={active}
           title={stepperTitle}
           inputFields={inputFields}
+          textAreaFields={textAreaFields}
           handleChange={handleChange}
           selectFields={selectFields}
           uploadPdfProgress={uploadPdfProgress}

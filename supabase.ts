@@ -40,3 +40,48 @@ export async function insertToProfile(formData: any, user: any) {
     return data;
   }
 }
+
+export async function getUserJobs(user: any) {
+  if (!user) return;
+
+  const { data, error } = await supabase
+    .from("jobsSubmitted")
+    .select("*")
+    .eq("userID", user.id);
+
+  if (error) console.log(error);
+
+  return data;
+}
+
+export async function getUserJobsCount(user: any) {
+  if (!user) return;
+
+  const { count, error } = await supabase
+    .from("jobsSubmitted")
+    .select("*", { count: "exact", head: true })
+    .eq("userID", user.id);
+
+  if (error) console.log(error);
+
+  return count;
+}
+
+export async function getUserProfile(user: any) {
+  if (!user) return;
+  const { data, error } = await supabase
+    .from("profile")
+    .select("*")
+    .eq("id", user.id);
+
+  return data;
+}
+export async function getUserPdf(user_id: any) {
+  if (!user_id) return;
+  const { data, error } = await supabase
+    .from("profile")
+    .select("resume_url")
+    .eq("id", user_id);
+
+  return data;
+}
