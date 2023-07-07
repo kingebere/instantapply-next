@@ -50,16 +50,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     url+'/guides',
     url+'/webinars',
     url+'/contact-sales',
-
-
-
-
-
-
-
-
-
-   
+    // Add any additional URLs you have knowledge of here
   ];
 
   const urls = [...additionalUrls];
@@ -70,7 +61,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     for (const url of urls) {
       try {
         const response = await axios.get(url);
-        
         const html = response.data;
         const $ = cheerio.load(html);
 
@@ -102,13 +92,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           });
         });
       } catch (error:any) {
-        console.error(`Error scraping ${url}:`, error);
         if (error.response && error.response.status === 404) {
-            console.error(`Page not found: ${url}`);
+            // console.error(`Page not found: ${url}`);
             continue; // Skip to the next URL
           }
-          // Handle the error gracefully, for example:
-          // res.status(500).json({ error: `Error scraping ${url}` });
+        // Handle the error gracefully, for example:
+        // res.status(500).json({ error: `Error scraping ${url}` });
+      }
     }
 
     const uniqueEmails = Array.from(new Set(emailAddresses));
@@ -130,4 +120,4 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       console.error("Error:", error);
       res.status(500).json({ error: "Internal Server Error" });
     });
-}}
+}
