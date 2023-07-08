@@ -17,8 +17,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 // uncommenting the cherrio implementation becauae it couldnt see certain mails"
-
-  const url = "https://gouconnect.com"; // Replace with the target website URL
+const{ company } = req.body;
+  const url = company 
   const parsedUrl = new URL(url);
   const domain = parsedUrl.hostname;
 
