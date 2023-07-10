@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
+import { Puppeteer } from "puppeteer";
 const cheerio = require("cheerio");
 const unirest = require("unirest");
 
@@ -18,9 +19,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
   
 // uncommenting the cherrio implementation becauae it couldnt see certain mails"
-const{ company } = req.body;
+const{ company } =req.body;
 
-  const url = company 
+  const url = "https://cowrywise.com" || company
   const parsedUrl = new URL(url);
   const domain = parsedUrl.hostname;
 
@@ -28,11 +29,13 @@ const{ company } = req.body;
   const additionalUrls = [
     url,
     url + `/contact`,
+        url + `/contact-us`,
     url + `/company/about`,
     url + `/company/privacy`,
     url + `/company/careers`,
     url + `/company/terms`,
     url + `/about`,
+    url +`culture`,
     url + `/privacy`,
     url + `/privacy-policy`,
     url + `/security`,
@@ -49,8 +52,8 @@ const{ company } = req.body;
     url + "/legal",
     url + "/demo",
     url + "/docs",
-    // url + "/developers",
-    // url + "/developer",
+    url + "/developers",
+    url + "/developer",
     url + "/faq",
     url + "/press",
     url + "/complaints",
@@ -68,6 +71,7 @@ const{ company } = req.body;
     url + "/join-our-team",
     url + "/examples",
     url+"/company",
+    url+"/faq-pages",
     url+"/support",
     url+"/jobs",
     // `status.+${url.split("//")[1]}`
@@ -159,7 +163,7 @@ const{ company } = req.body;
 }
 
 
-
+// This is Puppeteer
 
 // import { NextApiRequest, NextApiResponse } from "next";
 // import puppeteer from "puppeteer";
@@ -178,7 +182,7 @@ const{ company } = req.body;
 //     return;
 //   }
 
-//   const url = "https://paystack.com"; // Replace with the target website URL
+//   const url = "https://kitchen.co"; // Replace with the target website URL
 //   const parsedUrl = new URL(url);
 //   const domain = parsedUrl.hostname;
 //   const additionalUrls = [
