@@ -21,7 +21,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 // uncommenting the cherrio implementation becauae it couldnt see certain mails"
 const{ company } =req.body;
 
-  const url = "https://cowrywise.com" || company
+  const url = company
   const parsedUrl = new URL(url);
   const domain = parsedUrl.hostname;
 
