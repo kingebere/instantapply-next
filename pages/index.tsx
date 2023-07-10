@@ -70,9 +70,14 @@ export default function Home() {
           content="blSfmOOE3TZH4oMIOHPHxYYV9qW83ZLuUUgH-vADBxY"
         />
       </Head>
+<div className="relative overflow-x-hidden">
+<div className="absolute bg-gradient-radial w-full h-[398px] top-[-144px] left-[52px]">
+<svg  viewBox="0 0 1440 1200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M72,0 Q72,0 72,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M144,0 Q144,0 144,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M216,0 Q216,0 216,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M288,0 Q288,0 288,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M360,0 Q360,0 360,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M432,0 Q432,0 432,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M504,0 Q504,0 504,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M576,0 Q576,0 576,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M648,0 Q648,0 648,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M720,0 Q720,0 720,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M792,0 Q792,0 792,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M864,0 Q864,0 864,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M936,0 Q936,0 936,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M1008,0 Q1008,0 1008,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M1080,0 Q1080,0 1080,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M1152,0 Q1152,0 1152,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M1224,0 Q1224,0 1224,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M1296,0 Q1296,0 1296,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M1368,0 Q1368,0 1368,1200" stroke="#E4E7EB" stroke-width="1" stroke-opacity="1"></path><path d="M0,45 Q0,45 1440,45" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,90 Q0,90 1440,90" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,135 Q0,135 1440,135" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,180 Q0,180 1440,180" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,225 Q0,225 1440,225" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,270 Q0,270 1440,270" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,315 Q0,315 1440,315" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,360 Q0,360 1440,360" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,405 Q0,405 1440,405" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,450 Q0,450 1440,450" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,495 Q0,495 1440,495" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,540 Q0,540 1440,540" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,585 Q0,585 1440,585" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,630 Q0,630 1440,630" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,675 Q0,675 1440,675" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,720 Q0,720 1440,720" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,765 Q0,765 1440,765" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,810 Q0,810 1440,810" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,855 Q0,855 1440,855" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,900 Q0,900 1440,900" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,945 Q0,945 1440,945" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,990 Q0,990 1440,990" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,1035 Q0,1035 1440,1035" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,1080 Q0,1080 1440,1080" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,1125 Q0,1125 1440,1125" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path><path d="M0,1170 Q0,1170 1440,1170" stroke="#E4E7EB" stroke-opacity="1" stroke-width="1"></path></svg>
 
-      <section className="bg-instant-light-100 dark:bg-gray-900">
-        <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+        </div>
+      <section className="bg-instant-light-100 dark:bg-gray-900 ">
+  
+        <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12 relative z-50">
           {/* <a href="#" className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-instant-600 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700" role="alert">
             <span className="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span className="text-sm font-medium">InstantApply is out! See what&apos;s new</span> 
             <svg className="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
@@ -233,10 +238,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-gradient-halfcream mb-6">
+      <section className="bg-gradient-halfcream mb-6 ">
         <div
           style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
-          className="py-8 px-4 mx-auto max-w-screen-lg lg:px-12 sm:text-center lg:py-16"
+          className="py-8 px-4 mx-auto max-w-screen-lg lg:px-12 sm:text-center lg:py-16 relative z-50"
+          
         >
           <iframe
             src="https://www.loom.com/embed/231670c338c84d5ca11b87a67d7b597e"
@@ -251,7 +257,7 @@ export default function Home() {
             }}
           ></iframe>
         </div>
-      </section>
+      </section></div>
     </>
   );
 }
