@@ -7,7 +7,6 @@ import { initDropdowns } from "flowbite";
 
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
-
 import dynamic from "next/dynamic";
 
 import axios from "axios";

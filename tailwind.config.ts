@@ -17,16 +17,17 @@ module.exports = {
         "gradient-halfcream":
           "linear-gradient(to bottom, #f7f7f8 30% , white 30%)",
         "gradient-bitwhite": "linear-gradient(to top, #f7f7f8 78% , white 30%)",
-        "gradient-radial": 'radial-gradient(60.83% 60.83% at 50% 50%,#fbfbfb 47.02%,hsla(0,0%,98%,0) 100%)',
+        "gradient-radial":
+          "radial-gradient(60.83% 60.83% at 50% 50%,#fbfbfb 47.02%,hsla(0,0%,98%,0) 100%)",
       },
       height: {
-        '398px': '398px',
+        "398px": "398px",
       },
       top: {
-        '-144px': '-144px',
+        "-144px": "-144px",
       },
       left: {
-        '52px': '52px',
+        "52px": "52px",
       },
       colors: {
         primary: {

@@ -64,7 +64,6 @@ export default async function handler(
         });
       }
 
-     
       if (jobDescription) {
         const { data, error } = await supabase
           .from("jobviews")

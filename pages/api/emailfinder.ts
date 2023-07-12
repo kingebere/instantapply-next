@@ -13,15 +13,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "OPTIONS") {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Authorization, Content-Type"
+    );
     res.status(200).end();
     return;
   }
-  
-// uncommenting the cherrio implementation becauae it couldnt see certain mails"
-const{ company } =req.body;
 
-  const url = company
+  // uncommenting the cherrio implementation becauae it couldnt see certain mails"
+  const { company } = req.body;
+
+  const url = company;
   const parsedUrl = new URL(url);
   const domain = parsedUrl.hostname;
 
@@ -29,13 +32,13 @@ const{ company } =req.body;
   const additionalUrls = [
     url,
     url + `/contact`,
-        url + `/contact-us`,
+    url + `/contact-us`,
     url + `/company/about`,
     url + `/company/privacy`,
     url + `/company/careers`,
     url + `/company/terms`,
     url + `/about`,
-    url +`culture`,
+    url + `culture`,
     url + `/privacy`,
     url + `/privacy-policy`,
     url + `/security`,
@@ -70,13 +73,13 @@ const{ company } =req.body;
     url + "/contact-sales",
     url + "/join-our-team",
     url + "/examples",
-    url+"/company",
-    url+"/faq-pages",
-    url+"/support",
-    url+"/jobs",
+    url + "/company",
+    url + "/faq-pages",
+    url + "/support",
+    url + "/jobs",
     // `status.+${url.split("//")[1]}`
-    "https://paganresearch.io/details/" + name ,
-    "https://www.crunchbase.com/organization/"+name,
+    "https://paganresearch.io/details/" + name,
+    "https://www.crunchbase.com/organization/" + name,
   ];
 
   const urls = [...additionalUrls];
@@ -87,15 +90,13 @@ const{ company } =req.body;
     await Promise.all(
       urls.map(async (url) => {
         try {
-          const response =  await unirest
-          .get(url)
-          .headers({
+          const response = await unirest.get(url).headers({
             "User-Agent":
               "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
-          })
+          });
 
           const html = response.body;
-          
+
           const $ = cheerio.load(html);
 
           const emailAddresses: any[] = [];
@@ -103,18 +104,18 @@ const{ company } =req.body;
           // Add CSS selectors for elements likely to contain email addresses on each page
           const selectors = [
             'a[href^="mailto:"]', // Anchor tags with mailto links
-            '.email', // Elements with a specific class "email"
-            '[data-email]', // Elements with a data attribute "data-email"
-            'p',
-            'div',
-            'h2',
-            'span',
-            'h3',
-            'h4',
-            'h5',
-            'h1',
-            'li',
-            'a',
+            ".email", // Elements with a specific class "email"
+            "[data-email]", // Elements with a data attribute "data-email"
+            "p",
+            "div",
+            "h2",
+            "span",
+            "h3",
+            "h4",
+            "h5",
+            "h1",
+            "li",
+            "a",
           ];
 
           selectors.forEach((selector) => {
@@ -123,7 +124,7 @@ const{ company } =req.body;
                 $(element).attr("href")?.replace("mailto:", "") ||
                 $(element).attr("data-email") ||
                 $(element).text();
-                // console.log(email)
+              // console.log(email)
               if (isValidEmail(email) && email.includes(domain)) {
                 emailAddresses.push(email);
               }
@@ -143,7 +144,7 @@ const{ company } =req.body;
 
     const uniqueEmails = Array.from(new Set(emailArrays.flat()));
     console.log("Extracted Email Addresses:", uniqueEmails);
-    return uniqueEmails
+    return uniqueEmails;
   };
 
   // Helper function to validate email address format
@@ -161,7 +162,6 @@ const{ company } =req.body;
       res.status(500).json({ error: "Internal Server Error" });
     });
 }
-
 
 // This is Puppeteer
 
@@ -255,7 +255,7 @@ const{ company } =req.body;
 //           const elements = await page.$$(selector);
 //           for (const element of elements) {
 //             const email:any = await (await element.getProperty("href")).jsonValue();
-         
+
 //             if (isValidEmail(email) && email.includes(domain)) {
 //               emailAddresses.push(email);
 //             }

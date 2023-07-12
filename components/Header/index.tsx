@@ -6,7 +6,10 @@ function Header() {
       <header>
         <nav className="bg-instant-light-100 border-gray-200 dark:bg-gray-900 ">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
-            <a href="https://instantapply.co" className="flex items-center relative z-50">
+            <a
+              href="https://instantapply.co"
+              className="flex items-center relative z-50"
+            >
               <img
                 src="/assets/images/instantapply-logo.svg"
                 className="mr-1 h-6 sm:h-9"
